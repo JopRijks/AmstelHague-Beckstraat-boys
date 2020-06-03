@@ -1,6 +1,6 @@
-# Programmeertheorie: Amstelhaege
+# Amstelhaege
 
-## Beckstraat Boys
+## Groep: Beckstraat Boys
 * Jop Rijksbaron - 11685514 - jop.rijksbaron@student.uva.nl
 * Robin Spiers - 11829494 - rspiers@hotmail.nl
 * Vincent Kleiman - 11884622 - vinniekleiman1@gmail.com
@@ -8,7 +8,7 @@
 ## Case
 Na jarenlang getouwtrek is de knoop eindelijk doorgehakt: er komt een nieuwe woonwijk in de Duivendrechtse polder, net ten noorden van Ouderkerk aan de Amstel. De huisjes zijn bedoeld voor het midden- en bovensegment van de markt, met name expats en hoogopgeleide werknemers actief op de Amsterdamse Zuidas.
 
-Omdat de Duivenderechtse polder ooit beschermd natuurgebied was, is de compromis dat er alleen lage vrijstaande woningen komen, om zo toch het landelijk karakter te behouden. Dit, gecombineerd met een aantal strenge restricties ten aanzien van woningaanbod en het oppervlaktewater, maakt het een planologisch uitdagende klus. De gemeente overweegt drie varianten: de `20-huizenvariant`, de `40-huizenvariant` en de `60-huizenvariant`. Er wordt aangenomen dat een huis meer waard wordt naarmate de vrijstand toeneemt, de rekenpercentages zijn per huistype vastgesteld.
+Omdat de Duivenderechtse polder ooit beschermd natuurgebied was, is de compromis dat er alleen lage vrijstaande woningen komen, om zo toch het landelijk karakter te behouden. Dit, gecombineerd met een aantal strenge restricties ten aanzien van woningaanbod en het oppervlaktewater, maakt het een planologisch uitdagende klus. De gemeente overweegt drie varianten: de 20-huizenvariant, de 40-huizenvariant en de 60-huizenvariant. Er wordt aangenomen dat een huis meer waard wordt naarmate de vrijstand toeneemt, de rekenpercentages zijn per huistype vastgesteld.
 
 ## Requirements voor de wijk
 1. De wijk komt te staan op een stuk land van 180x160 meter (breed x diep). Er wordt door de planologen gerekend in hele meters.
@@ -42,8 +42,8 @@ N.B. Je programma hoeft hier verder niets mee te doen. Het programma hoeft dit e
 ## Check50
 Je kan je programma’s testen door de output mee te geven aan de check50. Dit kan in drie eenvoudige stappen:
 
-1. Genereer een antwoord en sla deze met het bovenstaande formaat op in een nieuw bestand met de naam `output.csv`
-2. Open een terminal in de folder waar je `output.csv` hebt opgeslagen
-3. Run het commando `check50 minprog/theorie-check50/master/amstelhaege`
+1. Genereer een antwoord en sla deze met het bovenstaande formaat op in een nieuw bestand met de naam 'output.csv'
+2. Open een terminal in de folder waar je 'output.csv' hebt opgeslagen
+3. Run het commando 'check50 minprog/theorie-check50/master/amstelhaege'
 
 De check50 is zo geschreven dat je de huizen vrij kan draaien en plaatsen. Dit betekent dat er niet wordt gecheckt of je de plaatsing volgens het grid heb gedaan, met daarbij alleen draaïngen van 90 graden. Hierdoor heb je meer vrijheid in het vinden van oplossingen, maar tevens zal je algoritme ook een stuk trager worden.
