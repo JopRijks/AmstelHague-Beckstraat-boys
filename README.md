@@ -1,3 +1,6 @@
 # Amstelhaege
 
-Test thahahahahahah
+Auteurs
+Jop Rijksbaron
+Robin Spiers
+Vincent Kleiman
