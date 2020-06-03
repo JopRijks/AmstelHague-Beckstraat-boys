@@ -1,3 +1,3 @@
-# AmstelHague-Beckstraat-boys
+# Amstelhaege
 Dit is een test
 Laatset test
