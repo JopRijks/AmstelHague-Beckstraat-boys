@@ -1,0 +1,1 @@
+# door middel van object-oriented programming worden in dit bestand classes vastgesteld
