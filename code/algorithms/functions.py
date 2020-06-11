@@ -19,15 +19,21 @@ def housebuilder(max_houses,amount_maison,amount_bungalow,amount_sfh):
         if i < amount_maison:
             house = House("maison", i)
             if location_checker(house, neighbourhood) == False:
-                print("ALARM ALARM ALARM")
+                while(location_checker(house, neighbourhood) == False):
+                    # print(i)
+                    house = House("maison", i)
         elif i < amount_bungalow + amount_maison:
             house= House("bungalow",i)
             if location_checker(house, neighbourhood) == False:
-                print("ALARM ALARM ALARM")
+                while(location_checker(house, neighbourhood) == False):
+                    # print(i)
+                    house = House("bungalow", i)
         elif i < max_houses:
             house = House("sfh",i)
             if location_checker(house, neighbourhood) == False:
-                print("ALARM ALARM ALARM")
+                while(location_checker(house, neighbourhood) == False):
+                    # print(i)
+                    house = House("sfh", i)
         neighbourhood.append(house)
     print(neighbourhood, len(neighbourhood))
 
@@ -37,35 +43,49 @@ def location_checker(house, neighbourhood):
     vert = range(house.y0, house.y1)
     horz = range(house.x0, house.x1)
     for i in neighbourhood:
-        if i.x0 in horz or i.x1 in horz and i.y0 in vert or i.y1 in vert:
-            return False
-        elif i.y0 in vert or i.y1 in vert:
+        if i.x0 in horz or i.x1 in horz:
+            if i.y0 in vert or i.y1 in vert:
+                # print(i.coordinates, house.coordinates)
+                return False
+        if i.y0 in vert or i.y1 in vert:
             min_distance = min([float(house.x0-i.x1),float(house.x1-i.x0)])            
             if house.free_area > abs(min_distance) and i.free_area > abs(min_distance): #absolute omdat anders negatieve afstanden
+                # print(min_distance)
                 return False
             return True
         elif i.x0 in horz or i.x1 in horz:
             min_distance = min([float(house.y0-i.y1),float(house.y1-i.y0)])            
             if house.free_area > abs(min_distance) and i.free_area > abs(min_distance): #absolute omdat anders negatieve afstanden
+                # print(min_distance)
                 return False
             return True
         else:
-            
+            if house.y1 < i.y0:
+                if house.x1 < i.x0:
+                    min_distance = distanceCalc(house.x1,house.y1,i.x0,i.y0)
+                    if house.free_area > abs(min_distance) and i.free_area > abs(min_distance): #absolute omdat anders negatieve afstanden
+                        # print(min_distance)                        
+                        return False 
+                elif house.x0 > i.x1:
+                    min_distance = distanceCalc(house.x0,house.y1,i.x1,i.y0)
+                    if house.free_area > abs(min_distance) and i.free_area > abs(min_distance): #absolute omdat anders negatieve afstanden
+                        # print(min_distance)
+                        return False 
+            elif house.y0 > i.y1:
+                if house.x1 < i.x0:
+                    min_distance = distanceCalc(house.x1,house.y0,i.x0,i.y1)
+                    if house.free_area > abs(min_distance) and i.free_area > abs(min_distance): #absolute omdat anders negatieve afstanden
+                        # print(min_distance)                    
+                        return False 
+                elif house.x0 > i.x1:
+                    min_distance = distanceCalc(house.x0,house.y0,i.x1,i.y1)
+                    if house.free_area > abs(min_distance) and i.free_area > abs(min_distance): #absolute omdat anders negatieve afstanden
+                        # print(min_distance)
+                        return False                            
 
-
-    # diagonal check
-    # for i in neighbourhood:
-    #     for j in [house.x0,house.x1]:
-    #         for k in [house.y0,house.y1]:
-    #             for l in [i.x0,i.x1]:
-    #                 for m in [i.y0,i.y1]:
-    #                     distances.append(calculateDistance(j,k,l,m))
-    # return True
-    # test = [i for i in distances if i < 2]
-    # if len(test) > 0:
-    #     print(test)
-    #     return False
-    # else:
-    #     return True
     return True
+
+def distanceCalc(x0,y0,x1,y1):
+    return float(((x1-x0)**2+(y1-y0)**2)**0.5)
+
 housebuilder(max_houses, amount_maison,amount_bungalow,amount_sfh)
