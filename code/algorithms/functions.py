@@ -33,23 +33,24 @@ def housebuilder(max_houses,amount_maison,amount_bungalow,amount_sfh):
 
 
 def location_checker(house, neighbourhood):
-    # check niet in elkaar
-
-
-    # vertical wall check     #horizontal wall check
+    # vertical wall check - horizontal wall check - inside check
     vert = range(house.y0, house.y1)
     horz = range(house.x0, house.x1)
     for i in neighbourhood:
-        if i.y0 in vert or i.y1 in vert:
+        if i.x0 in horz or i.x1 in horz and i.y0 in vert or i.y1 in vert:
+            return False
+        elif i.y0 in vert or i.y1 in vert:
             min_distance = min([float(house.x0-i.x1),float(house.x1-i.x0)])            
             if house.free_area > abs(min_distance) and i.free_area > abs(min_distance): #absolute omdat anders negatieve afstanden
                 return False
             return True
-        if i.x0 in horz or i.x1 in horz:
+        elif i.x0 in horz or i.x1 in horz:
             min_distance = min([float(house.y0-i.y1),float(house.y1-i.y0)])            
             if house.free_area > abs(min_distance) and i.free_area > abs(min_distance): #absolute omdat anders negatieve afstanden
                 return False
             return True
+        else:
+            
 
 
     # diagonal check
