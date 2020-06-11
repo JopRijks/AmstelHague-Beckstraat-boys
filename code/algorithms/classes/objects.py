@@ -1,5 +1,8 @@
 # door middel van object-oriented programming worden in dit bestand classes vastgesteld
-
+import random as rd
+#borders
+maxX = 180
+maxY = 160
 class Water:
     """Initializes water"""
     def __init__(self, grid, width, length, x0, x1, y0, y1):
@@ -12,7 +15,7 @@ class Water:
         self.y1 = y1
 
 class House:
-    def __init__(self, type):#, x, y):
+    def __init__(self, type, x=None, y=None):
         if type == "sfh":
             self.name = "sfh"
             self.length = 8
@@ -36,8 +39,12 @@ class House:
             self.price = 610000
             self.free_area = 6
             self.price_increasement = float(0.06)
-    	
-        # self.x0 = x
-        # self.x1 = x + self.width
-        # self.y0 = y
-        # self.y1 = y + self.length
+
+        if x==None or y==None:
+            x = rd.randrange(self.free_area, (maxX - self.free_area - self.length))
+            y = rd.randrange(self.free_area, (maxY - self.free_area - self.width))
+
+        self.x0 = x
+        self.x1 = x + self.width
+        self.y0 = y
+        self.y1 = y + self.length
