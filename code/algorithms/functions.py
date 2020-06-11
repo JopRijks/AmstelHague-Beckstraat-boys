@@ -15,10 +15,10 @@ amount_maison = max_houses * fraction_maison
 
 def housebuilder(amount_maison,amount_bungalow,amount_sfh):
     for i in range(int(amount_maison)):
-        print(House("maison"))
+        print(House("maison", i).coordinates)
     for i in range(int(amount_bungalow)):
-        print(House("bungalow"))
+        print(House("bungalow", i).coordinates)
     for i in range(int(amount_sfh)):
-        print(House("sfh"))
+        print(House("sfh", i).coordinates)
 
 housebuilder(amount_maison,amount_bungalow,amount_sfh)

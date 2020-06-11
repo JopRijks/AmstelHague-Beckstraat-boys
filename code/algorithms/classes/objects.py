@@ -1,5 +1,6 @@
 # door middel van object-oriented programming worden in dit bestand classes vastgesteld
 import random as rd
+
 #borders
 maxX = 180
 maxY = 160
@@ -15,7 +16,8 @@ class Water:
         self.y1 = y1
 
 class House:
-    def __init__(self, type, x=None, y=None):
+    def __init__(self, type, house_number, x=None, y=None):
+        self.id = house_number
         if type == "sfh":
             self.name = "sfh"
             self.length = 8
@@ -48,3 +50,4 @@ class House:
         self.x1 = x + self.width
         self.y0 = y
         self.y1 = y + self.length
+        self.coordinates = (x,y)
