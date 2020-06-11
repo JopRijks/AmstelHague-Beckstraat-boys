@@ -13,12 +13,58 @@ amount_bungalow = max_houses * fraction_bungalow
 amount_maison = max_houses * fraction_maison
 
 
-def housebuilder(amount_maison,amount_bungalow,amount_sfh):
-    for i in range(int(amount_maison)):
-        print(House("maison", i).coordinates)
-    for i in range(int(amount_bungalow)):
-        print(House("bungalow", i).coordinates)
-    for i in range(int(amount_sfh)):
-        print(House("sfh", i).coordinates)
+def housebuilder(max_houses,amount_maison,amount_bungalow,amount_sfh):
+    neighbourhood = []
+    for i in range(max_houses):
+        if i < amount_maison:
+            house = House("maison", i)
+            if location_checker(house, neighbourhood) == False:
+                print("ALARM ALARM ALARM")
+        elif i < amount_bungalow + amount_maison:
+            house= House("bungalow",i)
+            if location_checker(house, neighbourhood) == False:
+                print("ALARM ALARM ALARM")
+        elif i < max_houses:
+            house = House("sfh",i)
+            if location_checker(house, neighbourhood) == False:
+                print("ALARM ALARM ALARM")
+        neighbourhood.append(house)
+    print(neighbourhood, len(neighbourhood))
 
-housebuilder(amount_maison,amount_bungalow,amount_sfh)
+
+def location_checker(house, neighbourhood):
+    # check niet in elkaar
+
+
+    # vertical wall check     #horizontal wall check
+    vert = range(house.y0, house.y1)
+    horz = range(house.x0, house.x1)
+    for i in neighbourhood:
+        if i.y0 in vert or i.y1 in vert:
+            min_distance = min([float(house.x0-i.x1),float(house.x1-i.x0)])            
+            if house.free_area > abs(min_distance) and i.free_area > abs(min_distance): #absolute omdat anders negatieve afstanden
+                return False
+            return True
+        if i.x0 in horz or i.x1 in horz:
+            min_distance = min([float(house.y0-i.y1),float(house.y1-i.y0)])            
+            if house.free_area > abs(min_distance) and i.free_area > abs(min_distance): #absolute omdat anders negatieve afstanden
+                return False
+            return True
+
+
+    # diagonal check
+    # for i in neighbourhood:
+    #     for j in [house.x0,house.x1]:
+    #         for k in [house.y0,house.y1]:
+    #             for l in [i.x0,i.x1]:
+    #                 for m in [i.y0,i.y1]:
+    #                     distances.append(calculateDistance(j,k,l,m))
+    # return True
+    # test = [i for i in distances if i < 2]
+    # if len(test) > 0:
+    #     print(test)
+    #     return False
+    # else:
+    #     return True
+    return True
+housebuilder(max_houses, amount_maison,amount_bungalow,amount_sfh)
