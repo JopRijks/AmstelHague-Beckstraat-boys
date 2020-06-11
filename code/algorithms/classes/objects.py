@@ -34,5 +34,5 @@ class House:
             self.length = 12
             self.width = 10
             self.price = 610000
-            self.free_area = 12
+            self.free_area = 6
             self.price_increasement = float(0.06)
