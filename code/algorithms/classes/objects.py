@@ -28,18 +28,18 @@ class House:
 
         if type == "bungalow":
             self.name = "bungalow"
-            self.length = 11
-            self.width = 7
+            self.length = 7
+            self.width = 11
             self.price = 399000
             self.free_area = 3
             self.price_increasement = float(0.04)
 
         if type == "maison":
             self.name = "maison"
-            self.length = 12
-            self.width = 10
+            self.length = 10
+            self.width = 12
             self.price = 610000
-            self.free_area = 4
+            self.free_area = 6
             self.price_increasement = float(0.06)
 
         if x==None or y==None:

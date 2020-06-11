@@ -19,23 +19,31 @@ def housebuilder(max_houses,amount_maison,amount_bungalow,amount_sfh):
         if i < amount_maison:
             house = House("maison", i)
             if location_checker(house, neighbourhood) == False:
-                while(location_checker(house, neighbourhood) == False):
-                    # print(i)
+                for k in range(1000):
+                    print(i)
                     house = House("maison", i)
+                    if location_checker(house, neighbourhood) == True:
+                        break
         elif i < amount_bungalow + amount_maison:
             house= House("bungalow",i)
             if location_checker(house, neighbourhood) == False:
-                while(location_checker(house, neighbourhood) == False):
-                    # print(i)
+                for k in range(1000):
+                    print(i)
                     house = House("bungalow", i)
-        elif i < max_houses:
+                    if location_checker(house, neighbourhood) == True:
+                        break
+        else:
             house = House("sfh",i)
             if location_checker(house, neighbourhood) == False:
-                while(location_checker(house, neighbourhood) == False):
-                    # print(i)
+                for k in range(1000):
+                    print(i)
                     house = House("sfh", i)
+                    if location_checker(house, neighbourhood) == True:
+                        break
         neighbourhood.append(house)
-    print(neighbourhood, len(neighbourhood))
+    print([i.coordinates for i in neighbourhood], len(neighbourhood))
+    return neighbourhood
+
 
 
 def location_checker(house, neighbourhood):
@@ -43,46 +51,42 @@ def location_checker(house, neighbourhood):
     vert = range(house.y0, house.y1)
     horz = range(house.x0, house.x1)
     for i in neighbourhood:
-        if i.x0 in horz or i.x1 in horz:
-            if i.y0 in vert or i.y1 in vert:
-                # print(i.coordinates, house.coordinates)
+        if (house.x0 -2 <= i.x0 and house.x1+2 >= i.x0) or (house.x0-2 <= i.x1 and house.x1+2 >= i.x1):
+            if (house.y0-2 <= i.y0 and house.y1+2 >= i.y0) or (house.y0-2 <= i.y1 and house.y1+2 >= i.y1):
+                print("test")
                 return False
         if i.y0 in vert or i.y1 in vert:
-            min_distance = min([float(house.x0-i.x1),float(house.x1-i.x0)])            
-            if house.free_area > abs(min_distance) and i.free_area > abs(min_distance): #absolute omdat anders negatieve afstanden
-                # print(min_distance)
+            min_distance = min([float(house.x0-i.x1),float(house.x1-i.x0),float(house.x1-i.x1),float(house.x0-i.x0)])            
+            if house.free_area > abs(min_distance) or i.free_area > abs(min_distance): #absolute omdat anders negatieve afstanden
+                print(min_distance, i.free_area, house.free_area)
                 return False
-            return True
-        elif i.x0 in horz or i.x1 in horz:
-            min_distance = min([float(house.y0-i.y1),float(house.y1-i.y0)])            
-            if house.free_area > abs(min_distance) and i.free_area > abs(min_distance): #absolute omdat anders negatieve afstanden
-                # print(min_distance)
+        if i.x0 in horz or i.x1 in horz:
+            min_distance = min([float(house.y0-i.y1),float(house.y1-i.y0),float(house.y1-i.y1),float(house.y0-i.y0)])            
+            if house.free_area > abs(min_distance) or i.free_area > abs(min_distance): #absolute omdat anders negatieve afstanden
+                print(min_distance, i.free_area, house.free_area)
                 return False
-            return True
-        else:
-            if house.y1 < i.y0:
-                if house.x1 < i.x0:
-                    min_distance = distanceCalc(house.x1,house.y1,i.x0,i.y0)
-                    if house.free_area > abs(min_distance) and i.free_area > abs(min_distance): #absolute omdat anders negatieve afstanden
-                        # print(min_distance)                        
-                        return False 
-                elif house.x0 > i.x1:
-                    min_distance = distanceCalc(house.x0,house.y1,i.x1,i.y0)
-                    if house.free_area > abs(min_distance) and i.free_area > abs(min_distance): #absolute omdat anders negatieve afstanden
-                        # print(min_distance)
-                        return False 
-            elif house.y0 > i.y1:
-                if house.x1 < i.x0:
-                    min_distance = distanceCalc(house.x1,house.y0,i.x0,i.y1)
-                    if house.free_area > abs(min_distance) and i.free_area > abs(min_distance): #absolute omdat anders negatieve afstanden
-                        # print(min_distance)                    
-                        return False 
-                elif house.x0 > i.x1:
-                    min_distance = distanceCalc(house.x0,house.y0,i.x1,i.y1)
-                    if house.free_area > abs(min_distance) and i.free_area > abs(min_distance): #absolute omdat anders negatieve afstanden
-                        # print(min_distance)
-                        return False                            
-
+        if house.y1 < i.y0:
+            if house.x1 < i.x0:
+                min_distance = distanceCalc(house.x1,house.y1,i.x0,i.y0)
+                if house.free_area > abs(min_distance) or i.free_area > abs(min_distance): #absolute omdat anders negatieve afstanden
+                    print(min_distance, i.free_area, house.free_area)                        
+                    return False 
+            elif house.x0 > i.x1:
+                min_distance = distanceCalc(house.x0,house.y1,i.x1,i.y0)
+                if house.free_area > abs(min_distance) or i.free_area > abs(min_distance): #absolute omdat anders negatieve afstanden
+                    print(min_distance, i.free_area, house.free_area)
+                    return False 
+        elif house.y0 > i.y1:
+            if house.x1 < i.x0:
+                min_distance = distanceCalc(house.x1,house.y0,i.x0,i.y1)
+                if house.free_area > abs(min_distance) or i.free_area > abs(min_distance): #absolute omdat anders negatieve afstanden
+                    print(min_distance, i.free_area, house.free_area)                    
+                    return False 
+            elif house.x0 > i.x1:
+                min_distance = distanceCalc(house.x0,house.y0,i.x1,i.y1)
+                if house.free_area > abs(min_distance) or i.free_area > abs(min_distance): #absolute omdat anders negatieve afstanden
+                    print(min_distance, i.free_area, house.free_area)
+                    return False
     return True
 
 def distanceCalc(x0,y0,x1,y1):
