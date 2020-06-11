@@ -12,7 +12,7 @@ class Water:
         self.y1 = y1
 
 class House:
-    def __init__(self, type, id, x=None, y=None):
+    def __init__(self, type, x, y):
         if type == "sfh":
             self.name = "sfh"
             self.length = 8
@@ -36,3 +36,8 @@ class House:
             self.price = 610000
             self.free_area = 6
             self.price_increasement = float(0.06)
+
+    	self.x0 = x
+        self.x1 = x +self.width
+        self.y0 = y
+        self.y1 = y +self.length
