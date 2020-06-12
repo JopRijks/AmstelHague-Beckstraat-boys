@@ -43,8 +43,8 @@ class House:
             self.price_increasement = float(0.06)
 
         if x==None or y==None:
-            x = rd.randrange(self.free_area, (maxX - self.free_area - self.length))
-            y = rd.randrange(self.free_area, (maxY - self.free_area - self.width))
+            x = rd.randrange(self.free_area, (maxX - self.free_area - self.width))
+            y = rd.randrange(self.free_area, (maxY - self.free_area - self.length))
 
         self.x0 = x
         self.x1 = x + self.width

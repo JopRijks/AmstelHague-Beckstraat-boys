@@ -48,48 +48,49 @@ def housebuilder(max_houses,amount_maison,amount_bungalow,amount_sfh):
 
 def location_checker(house, neighbourhood):
     # vertical wall check - horizontal wall check - inside check
-    vert = range(house.y0, house.y1)
-    horz = range(house.x0, house.x1)
+    vert = list(range(house.y0, house.y1))
+    horz = list(range(house.x0, house.x1))
+    print(horz, vert)
     for i in neighbourhood:
+        print(i.x0, i.x1, i.y0, i.y1)
         if (house.x0 -2 <= i.x0 and house.x1+2 >= i.x0) or (house.x0-2 <= i.x1 and house.x1+2 >= i.x1):
             if (house.y0-2 <= i.y0 and house.y1+2 >= i.y0) or (house.y0-2 <= i.y1 and house.y1+2 >= i.y1):
-                print("test")
                 return False
         if i.y0 in vert or i.y1 in vert:
-            min_distance = min([float(house.x0-i.x1),float(house.x1-i.x0),float(house.x1-i.x1),float(house.x0-i.x0)])            
+            min_distance = min([abs(house.x0-i.x1),abs(house.x1-i.x0),abs(house.x1-i.x1),abs(house.x0-i.x0)])  
+            print(min_distance, i.free_area, house.free_area)          
             if house.free_area > abs(min_distance) or i.free_area > abs(min_distance): #absolute omdat anders negatieve afstanden
-                print(min_distance, i.free_area, house.free_area)
                 return False
-        if i.x0 in horz or i.x1 in horz:
-            min_distance = min([float(house.y0-i.y1),float(house.y1-i.y0),float(house.y1-i.y1),float(house.y0-i.y0)])            
+        elif i.x0 in horz or i.x1 in horz:
+            min_distance = min([abs(house.y0-i.y1),abs(house.y1-i.y0),abs(house.y1-i.y1),abs(house.y0-i.y0)])
+            print(min_distance, i.free_area, house.free_area)            
             if house.free_area > abs(min_distance) or i.free_area > abs(min_distance): #absolute omdat anders negatieve afstanden
-                print(min_distance, i.free_area, house.free_area)
                 return False
-        if house.y1 < i.y0:
+        elif house.y1 < i.y0:
             if house.x1 < i.x0:
                 min_distance = distanceCalc(house.x1,house.y1,i.x0,i.y0)
+                print(min_distance, i.free_area, house.free_area, "diagonal")  
                 if house.free_area > abs(min_distance) or i.free_area > abs(min_distance): #absolute omdat anders negatieve afstanden
-                    print(min_distance, i.free_area, house.free_area)                        
                     return False 
             elif house.x0 > i.x1:
                 min_distance = distanceCalc(house.x0,house.y1,i.x1,i.y0)
+                print(min_distance, i.free_area, house.free_area, "diagonal")  
                 if house.free_area > abs(min_distance) or i.free_area > abs(min_distance): #absolute omdat anders negatieve afstanden
-                    print(min_distance, i.free_area, house.free_area)
                     return False 
         elif house.y0 > i.y1:
             if house.x1 < i.x0:
                 min_distance = distanceCalc(house.x1,house.y0,i.x0,i.y1)
-                if house.free_area > abs(min_distance) or i.free_area > abs(min_distance): #absolute omdat anders negatieve afstanden
-                    print(min_distance, i.free_area, house.free_area)                    
+                print(min_distance, i.free_area, house.free_area, "diagonal")  
+                if house.free_area > abs(min_distance) or i.free_area > abs(min_distance): #absolute omdat anders negatieve afstanden                    
                     return False 
             elif house.x0 > i.x1:
                 min_distance = distanceCalc(house.x0,house.y0,i.x1,i.y1)
+                print(min_distance, i.free_area, house.free_area, "diagonal")  
                 if house.free_area > abs(min_distance) or i.free_area > abs(min_distance): #absolute omdat anders negatieve afstanden
-                    print(min_distance, i.free_area, house.free_area)
                     return False
     return True
 
 def distanceCalc(x0,y0,x1,y1):
-    return float(((x1-x0)**2+(y1-y0)**2)**0.5)
+    return abs(((x1-x0)**2+(y1-y0)**2)**0.5)
 
 housebuilder(max_houses, amount_maison,amount_bungalow,amount_sfh)
