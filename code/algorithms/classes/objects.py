@@ -2,14 +2,15 @@
 import random as rd
 
 #borders
-maxX = 180
-maxY = 160
+maxX = 160
+maxY = 180
 class Water:
     """Initializes water"""
-    def __init__(self, grid, width, length, x0, x1, y0, y1):
+    def __init__(self, id, name, width, length, x0, x1, y0, y1):
         self.width = width
         self.length = length
-        self.id = grid
+        self.id = id
+        self.name = name
         self.x0 = x0
         self.x1 = x1
         self.y0 = y0
