@@ -14,16 +14,25 @@ def visualise(neighbourhood, x=None):
 
     for i in range(len(neighbourhood)):
         if neighbourhood[i].name == "maison":
+            # maison1 = coll.PatchCollection([rect.Rectangle((neighbourhood[i].x0 -6,neighbourhood[i].y0 -6), 24, 22)])
+            # maison1.set_color("gray")
+            # ax.add_collection(maison1)
             maison = coll.PatchCollection([rect.Rectangle((neighbourhood[i].x0,neighbourhood[i].y0), 12, 10)])
             maison.set_color("yellow")
             ax.add_collection(maison)
         
         if neighbourhood[i].name == "bungalow":
+            # bungalow1 = coll.PatchCollection([rect.Rectangle((neighbourhood[i].x0 -3,neighbourhood[i].y0 -3), 17, 13)])
+            # bungalow1.set_color("gray")
+            # ax.add_collection(bungalow1)
             bungalow = coll.PatchCollection([rect.Rectangle((neighbourhood[i].x0,neighbourhood[i].y0), 11, 7)])
             bungalow.set_color("brown")
             ax.add_collection(bungalow)
 
         if neighbourhood[i].name == "sfh":
+            # sfh1 = coll.PatchCollection([rect.Rectangle((neighbourhood[i].x0 -2,neighbourhood[i].y0 -2), 12, 12)])
+            # sfh1.set_color("gray")
+            # ax.add_collection(sfh1)            
             sfh = coll.PatchCollection([rect.Rectangle((neighbourhood[i].x0,neighbourhood[i].y0), 8, 8)])
             sfh.set_color("red")
             ax.add_collection(sfh)
