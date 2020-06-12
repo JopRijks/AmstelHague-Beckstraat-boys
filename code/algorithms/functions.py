@@ -55,8 +55,6 @@ def housebuilder(max_houses,amount_maison,amount_bungalow,amount_sfh, neighbourh
         neighbourhood.append(house)
     return neighbourhood
 
-
-
 def location_checker(house, neighbourhood):
     # vertical wall check - horizontal wall check - inside check
     vert = list(range(house.y0, house.y1))
@@ -111,6 +109,4 @@ def distanceCalc(x0,y0,x1,y1):
 neighbourhood = []
 choice = 0 #0 1 of 2 voor water wijk
 neighbourhood = waterbuilder(choice, neighbourhood)
-
 housebuilder(max_houses, amount_maison,amount_bungalow,amount_sfh, neighbourhood)
-

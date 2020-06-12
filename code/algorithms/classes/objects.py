@@ -18,11 +18,7 @@ class Water:
 
 class House:
     def __init__(self, type, house_number, x=None, y=None):
-        if x==None or y==None:
-            x = rd.randrange(self.free_area, (maxX - self.free_area - self.width))
-            y = rd.randrange(self.free_area, (maxY - self.free_area - self.length))
-        self.score = 0
-        self.id = house_number
+
         if type == "sfh":
             self.name = "sfh"
             self.length = 8
@@ -47,6 +43,11 @@ class House:
             self.free_area = 6
             self.price_increasement = float(0.06)
 
+        if x==None or y==None:
+            x = rd.randrange(self.free_area, (maxX - self.free_area - self.width))
+            y = rd.randrange(self.free_area, (maxY - self.free_area - self.length))
+        self.score = 0
+        self.id = house_number
         
         self.x0 = x
         self.x1 = x + self.width

@@ -57,7 +57,7 @@ amount_maison = max_houses * fraction_maison
 
 for i in range(10):
     neighbourhood = []
-    choice = 2 #0 1 of 2 voor water wijk
+    choice = 0 #0 1 of 2 voor water wijk
     neighbourhood = waterbuilder(choice, neighbourhood)
     housebuilder(max_houses, amount_maison,amount_bungalow,amount_sfh, neighbourhood)
     visualise(neighbourhood, "test"+str(i))
