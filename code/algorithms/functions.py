@@ -28,7 +28,7 @@ def housebuilder(max_houses,amount_maison,amount_bungalow,amount_sfh):
                 while(location_checker(house, neighbourhood) == False):
                     # print(i)
                     house = House("bungalow", i)
-        elif i < max_houses:
+        elif i < amount_sfh:
             house = House("sfh",i)
             if location_checker(house, neighbourhood) == False:
                 while(location_checker(house, neighbourhood) == False):
@@ -47,7 +47,7 @@ def location_checker(house, neighbourhood):
             if i.y0 in vert or i.y1 in vert:
                 # print(i.coordinates, house.coordinates)
                 return False
-        if i.y0 in vert or i.y1 in vert:
+        elif i.y0 in vert or i.y1 in vert:
             min_distance = min([float(house.x0-i.x1),float(house.x1-i.x0)])            
             if house.free_area > abs(min_distance) and i.free_area > abs(min_distance): #absolute omdat anders negatieve afstanden
                 # print(min_distance)
