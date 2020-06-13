@@ -45,3 +45,4 @@ def visualise(nb, score, x=None):
     if x != None:
         plt.savefig(str(x) + ".png")
     plt.close()
+
