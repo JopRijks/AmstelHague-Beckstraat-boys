@@ -4,6 +4,7 @@ from classes.objects import *
 import random as rd
 import numpy as np
 import pandas as pd
+from visualise import visualise
 
 max_houses = 20
 fraction_sfh = 0.6
@@ -142,7 +143,20 @@ def scorecalculator(neighbourhood):
             score = score + (house.shortest_distance - house.free_area)*house.price_increasement
     return score
 
-neighbourhood = []
-choice = 0 #0 1 of 2 voor water wijk
-neighbourhood = waterbuilder(choice, neighbourhood)
-neighbourhood, score = housebuilder(max_houses, amount_maison,amount_bungalow,amount_sfh, neighbourhood)
+if __name__ == "__main__":
+    table = []
+    highest_score = 0 
+    best = 0
+    iterations = 10000
+    for i in range(iterations):
+        neighbourhood = []
+        choice = 0 #0 1 of 2 voor water wijk
+        neighbourhood = waterbuilder(choice, neighbourhood)
+        neighbourhood, score = housebuilder(max_houses, amount_maison,amount_bungalow,amount_sfh, neighbourhood)
+        table.append([i, max_houses, score])
+        if score > highest_score:
+            best = neighbourhood
+            highest_score = score
+    df = pd.DataFrame(table, columns = ["iteration", "max_houses","score"]).set_index("iteration")
+    df.to_csv(str(iterations)+"-random.csv")
+    visualise(best, highest_score, "bestrandom")
