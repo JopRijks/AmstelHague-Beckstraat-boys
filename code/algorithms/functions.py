@@ -3,7 +3,10 @@ from classes.grid import *
 from classes.objects import *
 import random as rd
 import numpy as np
-
+import pandas as pd
+from visualize import visualise
+import math
+import matplotlib.pyplot as plt
 max_houses = 20
 fraction_sfh = 0.6
 fraction_bungalow = 0.25 
@@ -12,80 +15,157 @@ amount_sfh = max_houses * fraction_sfh
 amount_bungalow = max_houses * fraction_bungalow
 amount_maison = max_houses * fraction_maison
 
+def waterbuilder(choice, neighbourhood):
+    df = [pd.read_csv("data/wijk_1.csv"),pd.read_csv("data/wijk_2.csv"),pd.read_csv("data/wijk_3.csv")][choice]
+    for index, rows in df.iterrows(): 
+    # Create list for the current row 
+        ID = index
+        name = rows.type
+        x0 = int(rows.bottom_left_xy.split(',')[0])
+        x1 = int(rows.top_right_xy.split(',')[0])
+        y0 = int(rows.bottom_left_xy.split(',')[1])
+        y1 = int(rows.top_right_xy.split(',')[1])
+        width = abs(x0-x1)
+        length = abs(y0-y1)
+        water = Water(ID,name, width, length, x0,x1,y0,y1)
+        neighbourhood.append(water)
+    return neighbourhood
 
-def housebuilder(max_houses,amount_maison,amount_bungalow,amount_sfh):
-    neighbourhood = []
+def housebuilder(max_houses,amount_maison,amount_bungalow,amount_sfh, neighbourhood):
     for i in range(max_houses):
         if i < amount_maison:
             house = House("maison", i)
             if location_checker(house, neighbourhood) == False:
-                while(location_checker(house, neighbourhood) == False):
-                    # print(i)
+                for k in range(1000):
                     house = House("maison", i)
+                    if location_checker(house, neighbourhood) == True:
+                        break
         elif i < amount_bungalow + amount_maison:
             house= House("bungalow",i)
             if location_checker(house, neighbourhood) == False:
-                while(location_checker(house, neighbourhood) == False):
-                    # print(i)
+                for k in range(1000):
                     house = House("bungalow", i)
-        elif i < amount_sfh:
+                    if location_checker(house, neighbourhood) == True:
+                        break
+        else:
             house = House("sfh",i)
             if location_checker(house, neighbourhood) == False:
-                while(location_checker(house, neighbourhood) == False):
-                    # print(i)
+                for k in range(1000):
                     house = House("sfh", i)
+                    if location_checker(house, neighbourhood) == True:
+                        break
         neighbourhood.append(house)
-    print(neighbourhood, len(neighbourhood))
-
+    score = scorecalculator(neighbourhood)
+    return neighbourhood, score
 
 def location_checker(house, neighbourhood):
     # vertical wall check - horizontal wall check - inside check
-    vert = range(house.y0, house.y1)
-    horz = range(house.x0, house.x1)
+    mindistance= []
+    vert = list(range(house.y0, house.y1))
+    horz = list(range(house.x0, house.x1))
     for i in neighbourhood:
-        if i.x0 in horz or i.x1 in horz:
-            if i.y0 in vert or i.y1 in vert:
-                # print(i.coordinates, house.coordinates)
+        if i.name == "WATER":
+            horzWater = list(range(i.x0, i.x1))
+            vertWater = list(range(i.y0, i.y1))
+            if (house.x0 in horzWater and house.y0 in vertWater):
                 return False
-        elif i.y0 in vert or i.y1 in vert:
-            min_distance = min([float(house.x0-i.x1),float(house.x1-i.x0)])            
-            if house.free_area > abs(min_distance) and i.free_area > abs(min_distance): #absolute omdat anders negatieve afstanden
-                # print(min_distance)
+            elif (house.x1 in horzWater and house.y0 in vertWater):
                 return False
-            return True
-        elif i.x0 in horz or i.x1 in horz:
-            min_distance = min([float(house.y0-i.y1),float(house.y1-i.y0)])            
-            if house.free_area > abs(min_distance) and i.free_area > abs(min_distance): #absolute omdat anders negatieve afstanden
-                # print(min_distance)
+            elif (house.x0 in horzWater and house.y1 in vertWater):
                 return False
-            return True
+            elif (house.x1 in horzWater and house.y1 in vertWater):
+                return False     
         else:
-            if house.y1 < i.y0:
+            if (house.x0 -2 <= i.x0 and house.x1+2 >= i.x0) or (house.x0-2 <= i.x1 and house.x1+2 >= i.x1):
+                if (house.y0-2 <= i.y0 and house.y1+2 >= i.y0) or (house.y0-2 <= i.y1 and house.y1+2 >= i.y1):
+                    return False
+            if i.y0 in vert or i.y1 in vert:
+                min_distance = min([abs(house.x0-i.x1),abs(house.x1-i.x0),abs(house.x1-i.x1),abs(house.x0-i.x0)])
+                mindistance.append(min_distance)          
+                if house.free_area > abs(min_distance) or i.free_area > abs(min_distance): #absolute omdat anders negatieve afstanden
+                    return False
+                elif min_distance < i.shortest_distance :
+                    #print(i.shortest_distance,min_distance)
+                    i.shortest_distance = min_distance
+            elif i.x0 in horz or i.x1 in horz:
+                min_distance = min([abs(house.y0-i.y1),abs(house.y1-i.y0),abs(house.y1-i.y1),abs(house.y0-i.y0)])
+                mindistance.append(min_distance)           
+                if house.free_area > abs(min_distance) or i.free_area > abs(min_distance): #absolute omdat anders negatieve afstanden
+                    return False
+                elif min_distance < i.shortest_distance :
+                    #print(i.shortest_distance,min_distance)
+                    i.shortest_distance = min_distance
+            elif house.y1 < i.y0:
                 if house.x1 < i.x0:
                     min_distance = distanceCalc(house.x1,house.y1,i.x0,i.y0)
-                    if house.free_area > abs(min_distance) and i.free_area > abs(min_distance): #absolute omdat anders negatieve afstanden
-                        # print(min_distance)                        
-                        return False 
+                    mindistance.append(min_distance)  
+                    if house.free_area > abs(min_distance) or i.free_area > abs(min_distance): #absolute omdat anders negatieve afstanden
+                        return False
+                    elif min_distance < i.shortest_distance :
+                        #print(i.shortest_distance,min_distance)
+                        i.shortest_distance = min_distance
                 elif house.x0 > i.x1:
                     min_distance = distanceCalc(house.x0,house.y1,i.x1,i.y0)
-                    if house.free_area > abs(min_distance) and i.free_area > abs(min_distance): #absolute omdat anders negatieve afstanden
-                        # print(min_distance)
-                        return False 
+                    mindistance.append(min_distance) 
+                    if house.free_area > abs(min_distance) or i.free_area > abs(min_distance): #absolute omdat anders negatieve afstanden
+                        return False
+                    elif min_distance < i.shortest_distance :
+                        #print(i.shortest_distance,min_distance)
+                        i.shortest_distance = min_distance                                                    
             elif house.y0 > i.y1:
                 if house.x1 < i.x0:
                     min_distance = distanceCalc(house.x1,house.y0,i.x0,i.y1)
-                    if house.free_area > abs(min_distance) and i.free_area > abs(min_distance): #absolute omdat anders negatieve afstanden
-                        # print(min_distance)                    
-                        return False 
+                    mindistance.append(min_distance) 
+                    if house.free_area > abs(min_distance) or i.free_area > abs(min_distance): #absolute omdat anders negatieve afstanden                    
+                        return False
+                    elif min_distance < i.shortest_distance :
+                        #print(i.shortest_distance,min_distance)
+                        i.shortest_distance = min_distance 
                 elif house.x0 > i.x1:
                     min_distance = distanceCalc(house.x0,house.y0,i.x1,i.y1)
-                    if house.free_area > abs(min_distance) and i.free_area > abs(min_distance): #absolute omdat anders negatieve afstanden
-                        # print(min_distance)
-                        return False                            
-
+                    mindistance.append(min_distance)  
+                    if house.free_area > abs(min_distance) or i.free_area > abs(min_distance): #absolute omdat anders negatieve afstanden
+                        return False
+                    elif min_distance < i.shortest_distance :
+                        #print(i.shortest_distance,min_distance)
+                        i.shortest_distance = min_distance
+    if len(mindistance) > 0:
+        #print(min(mindistance))
+        house.shortest_distance = min(mindistance)
     return True
 
 def distanceCalc(x0,y0,x1,y1):
-    return float(((x1-x0)**2+(y1-y0)**2)**0.5)
+    return abs(((x1-x0)**2+(y1-y0)**2)**0.5)
 
-housebuilder(max_houses, amount_maison,amount_bungalow,amount_sfh)
+def scorecalculator(neighbourhood):
+    score = 0
+    for house in neighbourhood:
+        if house.name != "WATER":
+            score = score + house.price*(round_down(house.shortest_distance,0) - house.free_area)*house.price_increasement
+    return score
+
+def round_down(n, decimals=0):
+    multiplier = 10 ** decimals
+    return math.floor(n * multiplier) / multiplier
+
+if __name__ == "__main__":
+    table = []
+    highest_score = 0 
+    best = 0
+    iterations = 10000
+    for i in range(iterations):
+        neighbourhood = []
+        choice = 0 #0 1 of 2 voor water wijk
+        neighbourhood = waterbuilder(choice, neighbourhood)
+        neighbourhood, score = housebuilder(max_houses, amount_maison,amount_bungalow,amount_sfh, neighbourhood)
+        table.append([i, max_houses, score])
+        if score > highest_score:
+            best = neighbourhood
+            highest_score = score
+    df = pd.DataFrame(table, columns = ["iteration", "max_houses","score"]).set_index("iteration")
+    df.to_csv(str(iterations)+"-random.csv")
+    
+    df.hist(column = "score")
+    plt.savefig("distribution_random.png")
+    plt.close()
+    visualise(best, highest_score, "bestrandom")
