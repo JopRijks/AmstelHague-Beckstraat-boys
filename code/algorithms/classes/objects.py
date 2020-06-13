@@ -48,7 +48,7 @@ class House:
             y = rd.randrange(self.free_area, (maxY - self.free_area - self.length))
         self.score = 0
         self.id = house_number
-        
+        self.shortest_distance = maxY
         self.x0 = x
         self.x1 = x + self.width
         self.y0 = y
