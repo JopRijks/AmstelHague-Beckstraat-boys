@@ -5,6 +5,7 @@ import random as rd
 import numpy as np
 import pandas as pd
 from visualise import visualise
+import math
 
 max_houses = 20
 fraction_sfh = 0.6
@@ -140,8 +141,12 @@ def scorecalculator(neighbourhood):
     score = 0
     for house in neighbourhood:
         if house.name != "WATER":
-            score = score + (house.shortest_distance - house.free_area)*house.price_increasement
+            score = score + house.price*(round_down(house.shortest_distance,0) - house.free_area)*house.price_increasement
     return score
+
+def round_down(n, decimals=0):
+    multiplier = 10 ** decimals
+    return math.floor(n * multiplier) / multiplier
 
 if __name__ == "__main__":
     table = []
