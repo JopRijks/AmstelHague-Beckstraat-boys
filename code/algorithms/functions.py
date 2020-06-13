@@ -141,8 +141,8 @@ def scorecalculator(neighbourhood):
         if house.name != "WATER":
             score = score + (house.shortest_distance - house.free_area)*house.price_increasement
     return score
+
 neighbourhood = []
 choice = 0 #0 1 of 2 voor water wijk
 neighbourhood = waterbuilder(choice, neighbourhood)
 neighbourhood, score = housebuilder(max_houses, amount_maison,amount_bungalow,amount_sfh, neighbourhood)
-print(score)

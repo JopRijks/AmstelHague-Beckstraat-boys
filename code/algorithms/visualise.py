@@ -4,13 +4,13 @@ import matplotlib.patches as rect
 import matplotlib.collections as coll
 from functions import housebuilder, waterbuilder
 
-def visualise(neighbourhood, x=None):
-
+def visualise(neighbourhood, score, x=None):
     ax = plt.axes()
     ax.set_xlim(0,160)
     ax.set_ylim(0,180)
 
     ax.set_facecolor("green")
+    ax.set_title("random score: "+str(score))
 
     for i in range(len(neighbourhood)):
         if neighbourhood[i].name == "maison":
@@ -59,5 +59,5 @@ for i in range(10):
     neighbourhood = []
     choice = 0 #0 1 of 2 voor water wijk
     neighbourhood = waterbuilder(choice, neighbourhood)
-    housebuilder(max_houses, amount_maison,amount_bungalow,amount_sfh, neighbourhood)
-    visualise(neighbourhood, "test"+str(i))
+    neighbourhood, score = housebuilder(max_houses, amount_maison,amount_bungalow,amount_sfh, neighbourhood)
+    visualise(neighbourhood, score, "test"+str(i))
