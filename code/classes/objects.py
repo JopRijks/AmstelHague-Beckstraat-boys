@@ -2,8 +2,10 @@
 import random as rd
 
 #borders
-maxX = 160
-maxY = 180
+class Borders:
+    def __init__(self):
+        self.maxX = 160
+        self.maxY = 180
 class Water:
     """Initializes water"""
     def __init__(self, id, name, width, length, x0, x1, y0, y1):
@@ -44,11 +46,11 @@ class House:
             self.price_increasement = float(0.06)
 
         if x==None or y==None:
-            x = rd.randrange(self.free_area, (maxX - self.free_area - self.width))
-            y = rd.randrange(self.free_area, (maxY - self.free_area - self.length))
+            x = rd.randrange(self.free_area, (Borders().maxX - self.free_area - self.width))
+            y = rd.randrange(self.free_area, (Borders().maxY - self.free_area - self.length))
         self.score = 0
         self.id = house_number
-        self.shortest_distance = maxY
+        self.shortest_distance = Borders().maxY
         self.x0 = x
         self.x1 = x + self.width
         self.y0 = y

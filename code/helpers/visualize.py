@@ -2,11 +2,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as rect
 import matplotlib.collections as coll
+from classes.objects import Borders
 
 def visualise(nb, score, x=None):
     ax = plt.axes()
-    ax.set_xlim(0,160)
-    ax.set_ylim(0,180)
+    ax.set_xlim(0,Borders().maxX)
+    ax.set_ylim(0,Borders().maxY)
 
     ax.set_facecolor("green")
     ax.set_title("random score: "+str(score))
@@ -43,6 +44,6 @@ def visualise(nb, score, x=None):
             ax.add_collection(water)
     
     if x != None:
-        plt.savefig(str(x) + ".png")
+        plt.savefig("results/"+str(x) + ".png")
     plt.close()
 
