@@ -7,7 +7,7 @@ class Borders:
         self.maxY = 180
 
 class Water:
-    """Initializes water"""
+    # Initializes water 
     def __init__(self, id, name, width, length, x0, x1, y0, y1):
         self.width = width
         self.length = length
@@ -19,6 +19,7 @@ class Water:
         self.y1 = y1
 
 class House:
+    # Initializes houses 
     def __init__(self, type, house_number, x=None, y=None):
 
         if type == "sfh":
@@ -45,12 +46,17 @@ class House:
             self.free_area = 6
             self.price_increasement = float(0.06)
 
+        # make coordinates if these are note given
         if x==None or y==None:
             x = rd.randrange(self.free_area, (Borders().maxX - self.free_area - self.width))
             y = rd.randrange(self.free_area, (Borders().maxY - self.free_area - self.length))
+        
+        
         self.score = 0
         self.id = house_number
         self.shortest_distance = Borders().maxY
+
+        # make from the coordinates from one corner the other coordinates
         self.x0 = x
         self.x1 = x + self.width
         self.y0 = y
