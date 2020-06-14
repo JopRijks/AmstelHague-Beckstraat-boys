@@ -47,5 +47,5 @@ if __name__ == "__main__":
     plt.savefig("results/distribution_random.png")
     plt.close()
     
-    # make a visualisation of the best random neighbourhood
+    # make a visualisation of the best random neighbourhood and save it
     visualise(best, highest_score, "bestrandom")
