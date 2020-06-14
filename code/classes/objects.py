@@ -5,6 +5,7 @@ class Borders:
     def __init__(self):
         self.maxX = 160
         self.maxY = 180
+
 class Water:
     """Initializes water"""
     def __init__(self, id, name, width, length, x0, x1, y0, y1):
