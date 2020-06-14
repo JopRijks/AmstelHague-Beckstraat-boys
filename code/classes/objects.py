@@ -1,7 +1,6 @@
 # door middel van object-oriented programming worden in dit bestand classes vastgesteld
 import random as rd
 
-#borders
 class Borders:
     def __init__(self):
         self.maxX = 160
