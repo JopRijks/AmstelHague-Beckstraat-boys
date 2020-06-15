@@ -10,7 +10,9 @@ def visualise(nb, score, x=None):
     ax.set_ylim(0,Borders().maxY)
 
     ax.set_facecolor("green")
-    ax.set_title("random score: "+str(score))
+
+    # title is the score in correct money formatting
+    ax.set_title("Score: " + "€{:,.2f}".format(score))
 
     for i in range(len(nb)):
         if nb[i].name == "maison":
