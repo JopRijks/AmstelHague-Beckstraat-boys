@@ -10,7 +10,7 @@ from helpers.builder import waterbuilder, housebuilder
 
 if __name__ == "__main__":
     # set variables through input
-    max_houses = 20
+    max_houses = 60 
     iterations = 100
     
     # choose between the three different water structures in the neighbourhood
@@ -40,7 +40,7 @@ if __name__ == "__main__":
     
     # save the information from the iteration
     df_random = pd.DataFrame(table, columns = ["iteration", "max_houses","score"]).set_index("iteration")
-    df_random.to_csv("results/"+ str(iterations)+"-random.csv")
+    df_random.to_csv("results/"+ str(iterations)+"-"+str(max_houses)+"-random.csv")
     
     # make a histogram of the scores from all the neighbourhoods made through the iterations
     df_random.hist(column = "score")
