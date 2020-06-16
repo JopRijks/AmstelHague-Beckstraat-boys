@@ -13,7 +13,8 @@ from code.helpers.visualize import visualise
 from code.helpers.builder import waterbuilder, housebuilder
 
 def random_algorithm(iterations, water_layout, max_houses):
-    # standard neighbourhood distributiion of the houses
+    
+    # standard neighbourhood distribution of the houses
     fraction_sfh,fraction_bungalow,fraction_maison = 0.6, 0.25, 0.15
     amount_sfh, amount_bungalow, amount_maison = max_houses * fraction_sfh, max_houses * fraction_bungalow, max_houses * fraction_maison
 
