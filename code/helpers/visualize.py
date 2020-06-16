@@ -33,7 +33,7 @@ def visualise(nb, score, x=None):
             # bungalow1.set_color("gray")
             # ax.add_collection(bungalow1)
             bungalow = coll.PatchCollection([rect.Rectangle((nb[i].x0,nb[i].y0), 11, 7)])
-            bungalow.set_color("burlywood")
+            bungalow.set_color("tan")
             ax.add_collection(bungalow)
 
         if nb[i].name == "sfh":
