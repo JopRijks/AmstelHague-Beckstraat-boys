@@ -10,7 +10,7 @@ def visualise(nb, score, x=None):
     ax.set_xlim(0,Borders().maxX)
     ax.set_ylim(0,Borders().maxY)
 
-    ax.set_facecolor("forestgreen")
+    ax.set_facecolor("lightgreen")
 
     # title of the plot is the score in correct currency formatting
     title = "Score: €{:,.2f}".format(score)
@@ -25,7 +25,7 @@ def visualise(nb, score, x=None):
             # maison1.set_color("gray")
             # ax.add_collection(maison1)
             maison = coll.PatchCollection([rect.Rectangle((nb[i].x0,nb[i].y0), 12, 10)])
-            maison.set_color("yellow")
+            maison.set_color("plum")
             ax.add_collection(maison)
         
         if nb[i].name == "bungalow":
@@ -33,7 +33,7 @@ def visualise(nb, score, x=None):
             # bungalow1.set_color("gray")
             # ax.add_collection(bungalow1)
             bungalow = coll.PatchCollection([rect.Rectangle((nb[i].x0,nb[i].y0), 11, 7)])
-            bungalow.set_color("saddlebrown")
+            bungalow.set_color("burlywood")
             ax.add_collection(bungalow)
 
         if nb[i].name == "sfh":
@@ -41,13 +41,13 @@ def visualise(nb, score, x=None):
             # sfh1.set_color("gray")
             # ax.add_collection(sfh1)            
             sfh = coll.PatchCollection([rect.Rectangle((nb[i].x0,nb[i].y0), 8, 8)])
-            sfh.set_color("red")
+            sfh.set_color("indianred")
             ax.add_collection(sfh)
 
         if nb[i].name == "WATER":
             waterLocation = rect.Rectangle((nb[i].x0, nb[i].y0), nb[i].width, nb[i].length)
             water = coll.PatchCollection([waterLocation])
-            water.set_color("royalblue")
+            water.set_color("lightskyblue")
             ax.add_collection(water)
     
     if x != None:
