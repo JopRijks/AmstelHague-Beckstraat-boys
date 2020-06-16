@@ -1,10 +1,10 @@
 # in dit bestand komt een algoritme
 import pandas as pd
 
-from classes.objects import Water, House
-from helpers.visualize import visualise
-from helpers.location import location_checker
-from helpers.score import scorecalculator
+from code.classes.objects import Water, House
+from code.helpers.visualize import visualise
+from code.helpers.location import location_checker
+from code.helpers.score import scorecalculator
 
 def waterbuilder(choice, neighbourhood):
     df = [pd.read_csv("data/wijk_1.csv"),pd.read_csv("data/wijk_2.csv"),pd.read_csv("data/wijk_3.csv")][choice]

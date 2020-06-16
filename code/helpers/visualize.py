@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as rect
 import matplotlib.collections as coll
 
-from classes.objects import Borders
+from code.classes.objects import Borders
 
 def visualise(nb, score, x=None):
     ax = plt.axes()
