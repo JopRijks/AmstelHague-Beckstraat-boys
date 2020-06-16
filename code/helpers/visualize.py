@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as rect
 import matplotlib.collections as coll
+
 from classes.objects import Borders
 
 def visualise(nb, score, x=None):
@@ -50,6 +51,5 @@ def visualise(nb, score, x=None):
             ax.add_collection(water)
     
     if x != None:
-        plt.savefig("results/"+str(x) + ".png")
+        plt.savefig("results/" + str(x) + ".png")
     plt.close()
-
