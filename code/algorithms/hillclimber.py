@@ -47,8 +47,13 @@ def hillclimber_algorithm(iterations, water_layout, max_houses):
             random_house = rd.choice(temp_neighbourhood)
 
         # choose a random new location for this house
-        random_house.x = rd.randrange(random_house.free_area, (Borders().maxX - random_house.free_area - random_house.width))
-        random_house.y = rd.randrange(random_house.free_area, (Borders().maxY - random_house.free_area - random_house.width))
+        random_x = rd.randrange(random_house.free_area, (Borders().maxX - random_house.free_area - random_house.width))
+        random_y = rd.randrange(random_house.free_area, (Borders().maxY - random_house.free_area - random_house.width))
+
+        random_house.x0 = random_x
+        random_house.y0 = random_y
+        random_house.x1 = random_house.free_area + random_x
+        random_house.y1 = random_house.free_area + random_y
 
         # use location checker to check whether it is allowed to place the house here
         if location_checker(random_house, temp_neighbourhood) == False:
