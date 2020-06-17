@@ -12,11 +12,10 @@ from code.helpers.score import scorecalculator
 from code.helpers.visualize import visualise
 from code.helpers.builder import waterbuilder, housebuilder
 
-dic = {}
-highest_score, best, table = 0, 0, []
-
 
 def greedy_housebuilder(max_houses,amount_maison,amount_bungalow,amount_sfh, neighbourhood):
+    highest_score, best, table = 0, 0, []
+    # Loop through every coordinate for each house
     for i in range(max_houses):
         for a in range(x):
             for b in range(y):
@@ -26,33 +25,29 @@ def greedy_housebuilder(max_houses,amount_maison,amount_bungalow,amount_sfh, nei
                         while location_checker(house, neighbourhood) == False:
                             house = House("maison", i)
 
-
                 elif i < amount_bungalow + amount_maison:
                     house= House("bungalow",i)
                     if location_checker(house, neighbourhood) == False:
                         while location_checker(house, neighbourhood) == False:
                             house = House("bungalow", i)
 
-
                 else:
                     house = House("sfh",i)
                     if location_checker(house, neighbourhood) == False:
                         while location_checker(house, neighbourhood) == False:
                             house = House("sfh", i)
-                
-                
+
                 score = scorecalculator(neighbourhood)
                 if score > highest_score:
                     highest_score = score
                     neighbourhood.append(house)
                 
-    
     score = scorecalculator(neighbourhood)
     return neighbourhood, score
 
-def greedy(max_houses,amount_maison,amount_bungalow,amount_sfh, neighbourhood):
-    # Voor ieder huis
 
+'''
+def greedy(max_houses,amount_maison,amount_bungalow,amount_sfh, neighbourhood):
  # standard neighbourhood distribution of the houses
     fraction_sfh,fraction_bungalow,fraction_maison = 0.6, 0.25, 0.15
     amount_sfh, amount_bungalow, amount_maison = max_houses * fraction_sfh, max_houses * fraction_bungalow, max_houses * fraction_maison
