@@ -11,14 +11,16 @@ import matplotlib.pyplot as plt
 from code.helpers.score import scorecalculator
 from code.helpers.visualize import visualise
 from code.helpers.builder import waterbuilder, housebuilder
+from code.classes.objects import *
+from code.helpers.location import *
 
 
 def greedy_housebuilder(max_houses,amount_maison,amount_bungalow,amount_sfh, neighbourhood):
     highest_score, best, table = 0, 0, []
     # Loop through every coordinate for each house
     for i in range(max_houses):
-        for a in range(x):
-            for b in range(y):
+        for a in range(Borders().maxX):
+            for b in range(Borders().maxY):
                 if i < amount_maison:
                     house = House("maison", i)
                     if location_checker(house, neighbourhood) == False:
@@ -58,7 +60,8 @@ def greedy_algorithm(iterations, water_layout, max_houses):
         neighbourhood = []
         neighbourhood = waterbuilder(water_layout, neighbourhood)
         neighbourhood, score = greedy_housebuilder(max_houses, amount_maison,amount_bungalow,amount_sfh, neighbourhood)
-        
+
+
         # add iteration number, max_houses and score to the table
         table.append([i, max_houses, score])
         
