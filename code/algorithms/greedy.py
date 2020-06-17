@@ -44,7 +44,7 @@ def greedy_housebuilder(max_houses,amount_maison,amount_bungalow,amount_sfh, nei
                 score = scorecalculator(neighbourhood)
                 if score > highest_score:
                     highest_score = score
-                neighbourhood.append(house)
+                    neighbourhood.append(house)
                 
     
     score = scorecalculator(neighbourhood)
@@ -52,13 +52,7 @@ def greedy_housebuilder(max_houses,amount_maison,amount_bungalow,amount_sfh, nei
 
 def greedy(max_houses,amount_maison,amount_bungalow,amount_sfh, neighbourhood):
     # Voor ieder huis
-    housebuilder(max_houses, amount_maison,amount_bungalow,amount_sfh, neighbourhood)
 
-
-
-
-
-'''
  # standard neighbourhood distribution of the houses
     fraction_sfh,fraction_bungalow,fraction_maison = 0.6, 0.25, 0.15
     amount_sfh, amount_bungalow, amount_maison = max_houses * fraction_sfh, max_houses * fraction_bungalow, max_houses * fraction_maison
