@@ -46,7 +46,7 @@ def greedy_housebuilder(max_houses,amount_maison,amount_bungalow,amount_sfh, nei
     return neighbourhood, score
 
 
-def greedy_algorithm(max_houses,amount_maison,amount_bungalow,amount_sfh, neighbourhood):
+def greedy_algorithm(iterations, water_layout, max_houses):
  # standard neighbourhood distribution of the houses
     fraction_sfh,fraction_bungalow,fraction_maison = 0.6, 0.25, 0.15
     amount_sfh, amount_bungalow, amount_maison = max_houses * fraction_sfh, max_houses * fraction_bungalow, max_houses * fraction_maison
@@ -68,13 +68,13 @@ def greedy_algorithm(max_houses,amount_maison,amount_bungalow,amount_sfh, neighb
             highest_score = score
     
     # save the information from the iteration
-    df_random = pd.DataFrame(table, columns = ["iteration", "max_houses","score"]).set_index("iteration")
-    df_random.to_csv("results/"+ str(iterations)+"-"+str(max_houses)+"-random.csv")
+    df_greedy = pd.DataFrame(table, columns = ["iteration", "max_houses","score"]).set_index("iteration")
+    df_greedy.to_csv("results/"+ str(iterations)+"-"+str(max_houses)+"-greedy.csv")
     
     # make a histogram of the scores from all the neighbourhoods made through the iterations
-    df_random.hist(column = "score")
-    plt.savefig("results/distribution_random.png")
+    df_greedy.hist(column = "score")
+    plt.savefig("results/distribution_greedy.png")
     plt.close()
     
     # make a visualisation of the best random neighbourhood and save it
-    visualise(best, highest_score, "bestrandom")
+    visualise(best, highest_score, "bestgreedy")
