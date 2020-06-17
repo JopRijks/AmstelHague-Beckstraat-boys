@@ -24,6 +24,9 @@ def hillclimber_algorithm(iterations, water_layout, max_houses):
     # standard neighbourhood distribution of the houses
     amount_sfh, amount_bungalow, amount_maison = max_houses*0.6, max_houses*0.25, max_houses*0.15
 
+    # create table
+    table = []
+
     # create neighbourhood, place water and build houses, collect neighbourhood and score
     neighbourhood = []
     neighbourhood = waterbuilder(water_layout, neighbourhood)
@@ -40,23 +43,37 @@ def hillclimber_algorithm(iterations, water_layout, max_houses):
         # choose a random house
         random_house = rd.choice(temp_neighbourhood)
 
+        while random_house.name == "WATER":
+            random_house = rd.choice(temp_neighbourhood)
+
         # choose a random new location for this house
         random_house.x = rd.randrange(random_house.free_area, (Borders().maxX - random_house.free_area - random_house.width))
         random_house.y = rd.randrange(random_house.free_area, (Borders().maxY - random_house.free_area - random_house.width))
 
         # use location checker to check whether it is allowed to place the house here
         if location_checker(random_house, temp_neighbourhood) == False:
-            break
-
+            pass
+        
         # if OK, place the house on this new location
 
         # now calculate the score of this new neighbourhood
         new_score = scorecalculator(temp_neighbourhood)
 
+        # save progress in table
+        table.append([i, max_houses, score, new_score])
+
         # compare the score of the old neighbourhood to the new one, choose the best one
         if new_score > score:
             neighbourhood = temp_neighbourhood
             score = new_score
+
+    # save results in csv file
+    df_hillclimber = pd.DataFrame(table, columns = ["iteration", "max_houses", "old_score", "new_score"])
+    df_hillclimber.to_csv("results/" + str(iterations) + "-" + str(max_houses) + "-hillclimber.csv")
+
+    plt.plot(df_hillclimber.iteration, df_hillclimber.old_score)
+    plt.savefig("results/hillclimber_diagram.png")
+    plt.close
 
     # make a visualisation of the best score and save it
     visualise(neighbourhood, score, "hillclimber")
