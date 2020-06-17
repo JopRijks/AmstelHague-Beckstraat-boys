@@ -14,6 +14,7 @@ from copy import deepcopy
 from code.helpers.score import scorecalculator
 from code.helpers.visualize import visualise
 from code.helpers.builder import waterbuilder, housebuilder
+from code.helpers.location import location_checker
 from code.classes.objects import *
 
 def hillclimber_algorithm(iterations, water_layout, max_houses):
@@ -54,6 +55,7 @@ def hillclimber_algorithm(iterations, water_layout, max_houses):
 
         # compare the score of the old neighbourhood to the new one, choose the best one
         if new_score > score:
+            neighbourhood = temp_neighbourhood
             score = new_score
 
     # make a visualisation of the best score and save it
