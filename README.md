@@ -10,7 +10,7 @@ Aan de hand van deze informatie is geprobeerd om diverse algoritmen en principes
 
 ### Vereisten (Prerequisites)
 
-Deze codebase is volledig geschreven in Python [3.6.2](https://www.python.org/downloads/). In requirements.txt zijn alle packages vermeld die nodig zijn om de code succesvol uit te voeren. Deze packages kunnen eenvoudig geinstalleerd worden door middel van onderstaande instructie:
+Deze codebase is volledig geschreven in Python [3.8.3](https://www.python.org/downloads/). In requirements.txt zijn alle packages vermeld die nodig zijn om de code succesvol uit te voeren. Deze packages kunnen eenvoudig geinstalleerd worden door middel van onderstaande instructie:
 
 ```
 pip install -r requirements.txt
