@@ -46,7 +46,6 @@ def greedy_housebuilder(max_houses,amount_maison,amount_bungalow,amount_sfh, nei
     return neighbourhood, score
 
 
-'''
 def greedy(max_houses,amount_maison,amount_bungalow,amount_sfh, neighbourhood):
  # standard neighbourhood distribution of the houses
     fraction_sfh,fraction_bungalow,fraction_maison = 0.6, 0.25, 0.15
