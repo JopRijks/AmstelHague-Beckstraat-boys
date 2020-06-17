@@ -7,10 +7,14 @@ import random as rd
 import numpy as np
 import math
 import matplotlib.pyplot as plt
+import random as rd
+
+from copy import deepcopy
 
 from code.helpers.score import scorecalculator
 from code.helpers.visualize import visualise
 from code.helpers.builder import waterbuilder, housebuilder
+from code.classes.objects import *
 
 def hillclimber_algorithm(iterations, water_layout, max_houses):
 
@@ -26,6 +30,31 @@ def hillclimber_algorithm(iterations, water_layout, max_houses):
     
     ################################ now iterate using the hill climber method ####################
 
+    # for loop through iterations
+    for i in range(iterations):
+
+        # create a deepcopy of the current neighbourhood layout
+        temp_neighbourhood = deepcopy(neighbourhood)
+
+        # choose a random house
+        random_house = rd.choice(temp_neighbourhood)
+
+        # choose a random new location for this house
+        random_house.x = rd.randrange(random_house.free_area, (Borders().maxX - random_house.free_area - random_house.width))
+        random_house.y = rd.randrange(random_house.free_area, (Borders().maxY - random_house.free_area - random_house.width))
+
+        # use location checker to check whether it is allowed to place the house here
+        if location_checker(random_house, temp_neighbourhood) == False:
+            break
+
+        # if OK, place the house on this new location
+
+        # now calculate the score of this new neighbourhood
+        new_score = scorecalculator(temp_neighbourhood)
+
+        # compare the score of the old neighbourhood to the new one, choose the best one
+        if new_score > score:
+            score = new_score
 
     # make a visualisation of the best score and save it
     visualise(neighbourhood, score, "hillclimber")
