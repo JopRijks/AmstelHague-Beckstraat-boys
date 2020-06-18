@@ -10,7 +10,7 @@ from code.helpers.visualize import visualise
 from code.helpers.builder import waterbuilder, housebuilder
 from code.algorithms.random import random_algorithm
 from code.algorithms.hillclimber import hillclimber_algorithm
-#from code.algorithms.greedy import *
+from code.algorithms.greedy import *
 
 if __name__ == "__main__":
 
@@ -56,9 +56,9 @@ if __name__ == "__main__":
         hillclimber_algorithm(iterations, water_layout, n_houses)
 
     # execute greedy algorithm
-    #elif approach == "greedy":
-    #    greedy_algorithm(iterations, water_layout, n_houses)
+    elif approach == "greedy":
+       greedy_algorithm(iterations, water_layout, n_houses)
 
-    # if no algorithm is specified execute random algorithm
+    #if no algorithm is specified execute random algorithm
     else:
         random_algorithm(iterations, water_layout, n_houses)
