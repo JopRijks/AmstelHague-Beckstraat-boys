@@ -15,7 +15,7 @@ from code.helpers.score import scorecalculator
 from code.helpers.visualize import visualise
 from code.helpers.builder import waterbuilder, housebuilder
 from code.helpers.location import location_checker
-from code.classes.objects import Borders
+from code.classes.objects import Borders, House
 
 def hillclimber_algorithm(iterations, water_layout, max_houses):
 
@@ -43,40 +43,23 @@ def hillclimber_algorithm(iterations, water_layout, max_houses):
         # choose a random house
         random_house = rd.choice([h for h in temp_neighbourhood if h.name != "WATER"])
         temp_neighbourhood.remove(random_house)
+        type_house = random_house.name
 
-        # choose a random new location for this house
-        random_x = rd.randrange(random_house.free_area, (Borders().maxX - random_house.free_area - random_house.width))
-        random_y = rd.randrange(random_house.free_area, (Borders().maxY - random_house.free_area - random_house.width))
-        random_house.x0 = random_x
-        random_house.y0 = random_y
-        random_house.x1 = random_house.width + random_x
-        random_house.y1 = random_house.length + random_y
-        random_house.coordinates = (random_x, random_y)
-
-        temp_neighbourhood.append(random_house)
-
-        # use location checker to check whether it is allowed to place the house here
-        """while location_checker(random_house, temp_neighbourhood) == False:
-            random_x = rd.randrange(random_house.free_area, (Borders().maxX - random_house.free_area - random_house.width))
-            random_y = rd.randrange(random_house.free_area, (Borders().maxY - random_house.free_area - random_house.width))
-            random_house.x0 = random_x
-            random_house.y0 = random_y
-            random_house.x1 = random_house.width + random_x
-            random_house.y1 = random_house.length + random_y
-            random_house.coordinates = (random_x, random_y)"""
-        
+        house = House(type_house, "changed-"+str(i))
+        if location_checker(house, temp_neighbourhood) == False:
+            while location_checker(house, temp_neighbourhood) == False:
+                house = House(type_house, i)
+        temp_neighbourhood.append(house)
         # if OK, place the house on this new location
 
         # now calculate the score of this new neighbourhood
         new_score = scorecalculator(temp_neighbourhood)
-
-        # save progress in table
-        table.append([i, max_houses, score, new_score])
-
         # compare the score of the old neighbourhood to the new one, choose the best one
         if new_score > score:
             neighbourhood = deepcopy(temp_neighbourhood)
             score = deepcopy(new_score)
+        # save progress in table
+        table.append([i, max_houses, score, new_score])
 
     # save results in csv file
     df_hillclimber = pd.DataFrame(table, columns = ["iteration", "max_houses", "old_score", "new_score"])
