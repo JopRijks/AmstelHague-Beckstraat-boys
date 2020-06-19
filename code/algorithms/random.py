@@ -40,7 +40,7 @@ def random_algorithm(iterations, water_layout, max_houses):
     
     # make a histogram of the scores from all the neighbourhoods made through the iterations
     df_random.hist(column = "score")
-    plt.savefig("results/distribution_random"+str(max_houses)".png")
+    plt.savefig("results/distribution_random"+str(max_houses)+".png")
     plt.close()
     
     # make a visualisation of the best random neighbourhood and save it
