@@ -20,16 +20,15 @@ def round_down(n, decimals=0):
     return math.floor(n * multiplier) / multiplier
 
 def distance_check(neighbourhood):
-    for house_a in neighbourhood:
-        if house_a.name != "WATER": 
-            for house_b in neighbourhood:
-                if house_b.name != "WATER":
-                    if house_a != house_b:
-                            min_distance = distance_calculator(house_a,house_b)
-                            if house_a.shortest_distance > min_distance:
-                                house_a.shortest_distance = min_distance
-                            if house_b.shortest_distance > min_distance:
-                                house_b.shortest_distance = min_distance
+    house_b = neighbourhood[-1]
+    for house_a in neighbourhood[:-1]:
+        if house_a.name != "WATER" and house_b.name!="WATER": 
+            if house_a != house_b:
+                min_distance = distance_calculator(house_a,house_b)
+                if house_a.shortest_distance > min_distance:
+                    house_a.shortest_distance = min_distance
+                if house_b.shortest_distance > min_distance:
+                    house_b.shortest_distance = min_distance
     return neighbourhood
 
 def distance_calculator(house_a,house_b):
