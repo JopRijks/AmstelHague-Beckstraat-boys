@@ -68,8 +68,8 @@ def hillclimber_algorithm(iterations, water_layout, max_houses):
 
     # create a plot of the progress
     plt.plot(df_hillclimber.iteration, df_hillclimber.old_score)
-    plt.savefig("results/hillclimber_diagram.png")
+    plt.savefig("results/hillclimber_diagram"+str(max_houses)".png")
     plt.close()
 
     # make a visualisation of the best score and save it
-    visualise(neighbourhood, score, "hillclimber")
+    visualise(neighbourhood, score, "hillclimber_visualisation-"+str(max_houses))
