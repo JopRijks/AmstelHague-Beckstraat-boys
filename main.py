@@ -18,10 +18,16 @@ if __name__ == "__main__":
     
     # check if number of input arguments is correct
     if len(sys.argv) != 5:
-        approach = "random"
-        iterations = 100
-        n_houses = 20
-        water_layout = 0
+        print("wrong input \n use: [approach] [iterations] [number of houses] [water map]")
+        print("approach: random, hillcliber or greedy")
+        print("iterations: just a positive number")
+        print("number of houses: choose 20, 40 or 60")
+        print("water map: choose 0, 1 or 2")
+        exit()
+        # approach = "random"
+        # iterations = 100
+        # n_houses = 20
+        # water_layout = 0
 
     else:
 

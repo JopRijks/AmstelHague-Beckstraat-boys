@@ -66,14 +66,10 @@ def hillclimber_algorithm(iterations, water_layout, max_houses):
     df_hillclimber = pd.DataFrame(table, columns = ["iteration", "max_houses", "old_score", "new_score"])
     df_hillclimber.to_csv("results/" + str(iterations) + "-" + str(max_houses) + "-hillclimber.csv")
 
-    for i in neighbourhood:
-        if i.name != "WATER":
-            print(i.shortest_distance)
-
     # create a plot of the progress
     plt.plot(df_hillclimber.iteration, df_hillclimber.old_score)
     plt.savefig("results/hillclimber_diagram.png")
-    plt.close
+    plt.close()
 
     # make a visualisation of the best score and save it
     visualise(neighbourhood, score, "hillclimber")

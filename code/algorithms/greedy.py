@@ -78,11 +78,10 @@ def greedy_algorithm(iterations, water_layout, max_houses):
     df_greedy = pd.DataFrame(table, columns = ["iteration", "max_houses","score"])
     df_greedy.to_csv("results/"+ str(iterations)+"-"+str(max_houses)+"-greedy.csv")
     
-
     # make a histogram of the scores from all the neighbourhoods made through the iterations
     plt.plot(df_greedy.iteration, df_greedy.score)
     plt.savefig("results/hillclimber_diagram.png")
-    plt.close
+    plt.close()
     
     # make a visualisation of the best random neighbourhood and save it
     visualise(neighbourhood, highest_score, "bestgreedy")
