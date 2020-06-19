@@ -11,7 +11,7 @@ import random as rd
 
 from copy import deepcopy
 
-from code.helpers.score import scorecalculator
+from code.helpers.score import scorecalculator, distance_check
 from code.helpers.visualize import visualise
 from code.helpers.builder import waterbuilder, housebuilder
 from code.helpers.location import location_checker
@@ -49,21 +49,26 @@ def hillclimber_algorithm(iterations, water_layout, max_houses):
         if location_checker(house, temp_neighbourhood) == False:
             while location_checker(house, temp_neighbourhood) == False:
                 house = House(type_house, i)
+        
         temp_neighbourhood.append(house)
-        # if OK, place the house on this new location
-
+        # calculate new shortest_distances
+        temp_neighbourhood = distance_check(temp_neighbourhood)
         # now calculate the score of this new neighbourhood
         new_score = scorecalculator(temp_neighbourhood)
         # compare the score of the old neighbourhood to the new one, choose the best one
         if new_score > score:
             neighbourhood = deepcopy(temp_neighbourhood)
-            score = deepcopy(new_score)
+            score = new_score
         # save progress in table
         table.append([i, max_houses, score, new_score])
 
     # save results in csv file
     df_hillclimber = pd.DataFrame(table, columns = ["iteration", "max_houses", "old_score", "new_score"])
     df_hillclimber.to_csv("results/" + str(iterations) + "-" + str(max_houses) + "-hillclimber.csv")
+
+    for i in neighbourhood:
+        if i.name != "WATER":
+            print(i.shortest_distance)
 
     # create a plot of the progress
     plt.plot(df_hillclimber.iteration, df_hillclimber.old_score)

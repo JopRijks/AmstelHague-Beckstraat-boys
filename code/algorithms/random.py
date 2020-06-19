@@ -8,7 +8,7 @@ import numpy as np
 import math
 import matplotlib.pyplot as plt
 
-from code.helpers.score import scorecalculator
+from code.helpers.score import scorecalculator, distance_check
 from code.helpers.visualize import visualise
 from code.helpers.builder import waterbuilder, housebuilder
 

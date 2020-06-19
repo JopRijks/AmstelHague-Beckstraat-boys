@@ -4,7 +4,7 @@ import pandas as pd
 from code.classes.objects import Water, House
 from code.helpers.visualize import visualise
 from code.helpers.location import location_checker
-from code.helpers.score import scorecalculator
+from code.helpers.score import scorecalculator, distance_check
 
 def waterbuilder(choice, neighbourhood):
     df = [pd.read_csv("data/wijk_1.csv"),pd.read_csv("data/wijk_2.csv"),pd.read_csv("data/wijk_3.csv")][choice]
@@ -40,5 +40,6 @@ def housebuilder(max_houses,amount_maison,amount_bungalow,amount_sfh, neighbourh
                 while location_checker(house, neighbourhood) == False:
                     house = House("sfh", i)
         neighbourhood.append(house)
+    neighbourhood = distance_check(neighbourhood)
     score = scorecalculator(neighbourhood)
     return neighbourhood, score

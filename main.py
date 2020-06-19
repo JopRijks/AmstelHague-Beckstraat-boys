@@ -10,7 +10,7 @@ from code.helpers.visualize import visualise
 from code.helpers.builder import waterbuilder, housebuilder
 from code.algorithms.random import random_algorithm
 from code.algorithms.hillclimber import hillclimber_algorithm
-from code.algorithms.greedy import *
+from code.algorithms.greedy import greedy_algorithm
 
 if __name__ == "__main__":
 
