@@ -20,14 +20,21 @@ def greedy_algorithm(iterations, water_layout, max_houses):
  # standard neighbourhood distribution of the houses
     fraction_bungalow,fraction_maison = 0.25, 0.15
     amount_bungalow, amount_maison =  max_houses * fraction_bungalow, max_houses * fraction_maison
-
     highest_score, table = 0, []
     # create neighbourhood, place water and build houses, collect neighbourhood and score
     neighbourhood = []
     neighbourhood = waterbuilder(water_layout, neighbourhood)
     highest_score = 0
+    lijst = []
+    bezet = []
+    for i in neighbourhood:
+        for j in range(i.x0, i.x1):
+            for k in range(i.y0, i.y1):
+                bezet += [(j,k)]
+
     # neighbourhood, score = greedy_housebuilder(max_houses, amount_maison,amount_bungalow,amount_sfh, neighbourhood)
     for i in range(max_houses):
+        print(len(bezet))
         highest_score = 0
         if i < amount_maison:
             test_house = House("maison", i)
@@ -37,39 +44,47 @@ def greedy_algorithm(iterations, water_layout, max_houses):
             name = "bungalow"
         else:
             test_house = House("sfh", i)
-            name = "sfh"                       
+            name = "sfh"
         for a in range(test_house.free_area, (Borders().maxX - test_house.free_area - test_house.width)):
             for b in range(test_house.free_area, (Borders().maxY - test_house.free_area - test_house.width)):
-                temp_neighbourhood = deepcopy(neighbourhood)
-                if name == "maison":
-                    house = House("maison", i,a,b)
-                    if location_checker(house, temp_neighbourhood) == True:
-                        temp_neighbourhood.append(house)
-                        temp_neighbourhood = distance_check(temp_neighbourhood)
-                        score = scorecalculator(temp_neighbourhood)
-                        if score > highest_score:
-                            best_house = deepcopy(house)
-                            highest_score = score
-                if name == "bungalow":
-                    house= House("bungalow",i, a, b)
-                    if location_checker(house, temp_neighbourhood) == True:
-                        temp_neighbourhood.append(house)
-                        temp_neighbourhood = distance_check(temp_neighbourhood)
-                        score = scorecalculator(temp_neighbourhood)
-                        if score > highest_score:
-                            best_house = deepcopy(house)
-                            highest_score = score
-                if name == "sfh":
-                    house = House("sfh",i,a,b)
-                    if location_checker(house, temp_neighbourhood) == True:
-                        temp_neighbourhood.append(house)
-                        temp_neighbourhood = distance_check(temp_neighbourhood)
-                        score = scorecalculator(temp_neighbourhood)
-                        if score > highest_score:
-                            best_house = deepcopy(house)
-                            highest_score = score
+                if (a,b) not in bezet:
+                    lijst += [(a,b)]
+        for plek in lijst:
+            a = plek[0]
+            b = plek[1]
+            temp_neighbourhood = deepcopy(neighbourhood)
+            if name == "maison":
+                house = House("maison", i,a,b)
+                if location_checker(house, temp_neighbourhood) == True:
+                    temp_neighbourhood.append(house)
+                    temp_neighbourhood = distance_check(temp_neighbourhood)
+                    score = scorecalculator(temp_neighbourhood)
+                    if score > highest_score:
+                        best_house = deepcopy(house)
+                        highest_score = score
+            if name == "bungalow":
+                house= House("bungalow",i, a, b)
+                if location_checker(house, temp_neighbourhood) == True:
+                    temp_neighbourhood.append(house)
+                    temp_neighbourhood = distance_check(temp_neighbourhood)
+                    score = scorecalculator(temp_neighbourhood)
+                    if score > highest_score:
+                        best_house = deepcopy(house)
+                        highest_score = score
+            if name == "sfh":
+                house = House("sfh",i,a,b)
+                if location_checker(house, temp_neighbourhood) == True:
+                    temp_neighbourhood.append(house)
+                    temp_neighbourhood = distance_check(temp_neighbourhood)
+                    score = scorecalculator(temp_neighbourhood)
+                    if score > highest_score:
+                        best_house = deepcopy(house)
+                        highest_score = score
         
         neighbourhood.append(best_house)
+        for i in range(best_house.x0,best_house.x1):
+            for j in range(best_house.y0, best_house.y1):
+                bezet += [(i,j)]
         neighbourhood = distance_check(neighbourhood)
         total_score = scorecalculator(neighbourhood)
         table.append([i, max_houses, total_score])
