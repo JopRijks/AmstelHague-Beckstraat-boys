@@ -7,6 +7,7 @@ import random as rd
 import numpy as np
 import math
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 from code.helpers.score import scorecalculator, distance_check
 from code.helpers.visualize import visualise
@@ -39,9 +40,14 @@ def random_algorithm(iterations, water_layout, max_houses):
     df_random.to_csv("results/"+ str(iterations)+"-"+str(max_houses)+"-random.csv")
     
     # make a histogram of the scores from all the neighbourhoods made through the iterations
-    df_random.hist(column = "score")
-    plt.savefig("results/distribution_random"+str(max_houses)+".png")
-    plt.close()
-    
+    #df_random.hist(column = "score")
+    #plt.savefig("results/distribution_random"+str(max_houses)+".png")
+    #plt.close()
+
     # make a visualisation of the best random neighbourhood and save it
     visualise(best, highest_score, "random_visualisation-"+ str(max_houses))
+
+    # make a plot of the algorithms performance
+    sns.set(style="darkgrid")
+    sns_plot = sns.distplot(df_random.score)
+    sns_plot.figure.savefig("results/distplot_random-"+str(max_houses)+".png")
