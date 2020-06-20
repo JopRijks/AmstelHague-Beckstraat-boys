@@ -40,6 +40,6 @@ def housebuilder(max_houses,amount_maison,amount_bungalow,amount_sfh, neighbourh
                 while location_checker(house, neighbourhood) == False:
                     house = House("sfh", i)
         neighbourhood.append(house)
-    neighbourhood = distance_check(neighbourhood, "all")
+        neighbourhood = distance_check(neighbourhood)
     score = scorecalculator(neighbourhood)
     return neighbourhood, score

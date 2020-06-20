@@ -54,7 +54,7 @@ class House:
         
         self.score = 0
         self.id = house_number
-        self.shortest_distance = Borders().maxY
+        self.shortest_distance = (Borders().maxY**2+Borders().maxX**2)**0.5
 
         # make from the coordinates from one corner the other coordinates
         self.x0 = x

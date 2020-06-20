@@ -4,6 +4,7 @@ import random as rd
 import numpy as np
 import math
 import matplotlib.pyplot as plt
+import time
 
 from code.helpers.score import scorecalculator
 from code.helpers.visualize import visualise
@@ -15,7 +16,7 @@ from code.algorithms.greedy import greedy_algorithm
 if __name__ == "__main__":
 
     ##################### set variables through command line input
-    
+    t1 = time.time()
     # check if number of input arguments is correct
     if len(sys.argv) != 5:
         print("wrong input \n use: [approach] [iterations] [number of houses] [water map]")
@@ -68,3 +69,6 @@ if __name__ == "__main__":
     #if no algorithm is specified execute random algorithm
     else:
         random_algorithm(iterations, water_layout, n_houses)
+    
+    t2 = time.time()
+    print(t2-t1)
