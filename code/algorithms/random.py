@@ -12,6 +12,7 @@ import seaborn as sns
 from code.helpers.score import scorecalculator, distance_check
 from code.helpers.visualize import visualise
 from code.helpers.builder import waterbuilder, housebuilder
+from code.helpers.performance import performanceplot
 
 def random_algorithm(iterations, water_layout, max_houses):
     
@@ -48,6 +49,8 @@ def random_algorithm(iterations, water_layout, max_houses):
     visualise(best, highest_score, "random_visualisation-"+ str(max_houses))
 
     # make a plot of the algorithms performance
-    sns.set(style="darkgrid")
-    sns_plot = sns.distplot(df_random.score)
-    sns_plot.figure.savefig("results/distplot_random-"+str(max_houses)+".png")
+    #sns.set(style="darkgrid")
+    #sns_plot = sns.distplot(df_random.score)
+    #sns_plot.figure.savefig("results/distplot_random-"+str(max_houses)+".png")
+
+    performanceplot("random", max_houses, "dist", df_random.score)

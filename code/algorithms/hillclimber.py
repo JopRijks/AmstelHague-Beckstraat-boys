@@ -16,6 +16,7 @@ from code.helpers.visualize import visualise
 from code.helpers.builder import waterbuilder, housebuilder
 from code.helpers.location import location_checker
 from code.classes.objects import Borders, House
+from code.helpers.performance import performanceplot
 
 def hillclimber_algorithm(iterations, water_layout, max_houses):
 
@@ -67,9 +68,11 @@ def hillclimber_algorithm(iterations, water_layout, max_houses):
     df_hillclimber.to_csv("results/" + str(iterations) + "-" + str(max_houses) + "-hillclimber.csv")
 
     # create a plot of the progress
-    plt.plot(df_hillclimber.iteration, df_hillclimber.old_score)
-    plt.savefig("results/hillclimber_diagram"+str(max_houses)+".png")
-    plt.close()
+    #plt.plot(df_hillclimber.iteration, df_hillclimber.old_score)
+    #plt.savefig("results/hillclimber_diagram"+str(max_houses)+".png")
+    #plt.close()
 
     # make a visualisation of the best score and save it
     visualise(neighbourhood, score, "hillclimber_visualisation-"+str(max_houses))
+
+    performanceplot("Hill climber", max_houses, "line", df_hillclimber.iteration, df_hillclimber.old_score)
