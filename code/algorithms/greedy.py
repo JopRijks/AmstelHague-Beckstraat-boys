@@ -25,7 +25,6 @@ def greedy_algorithm(iterations, water_layout, max_houses):
     neighbourhood = []
     neighbourhood = waterbuilder(water_layout, neighbourhood)
     highest_score = 0
-    lijst = []
     bezet = []
     for i in neighbourhood:
         for j in range(i.x0, i.x1):
@@ -34,7 +33,6 @@ def greedy_algorithm(iterations, water_layout, max_houses):
 
     # neighbourhood, score = greedy_housebuilder(max_houses, amount_maison,amount_bungalow,amount_sfh, neighbourhood)
     for i in range(max_houses):
-        print(len(bezet))
         highest_score = 0
         if i < amount_maison:
             test_house = House("maison", i)
@@ -45,6 +43,7 @@ def greedy_algorithm(iterations, water_layout, max_houses):
         else:
             test_house = House("sfh", i)
             name = "sfh"
+        lijst = []
         for a in range(test_house.free_area, (Borders().maxX - test_house.free_area - test_house.width)):
             for b in range(test_house.free_area, (Borders().maxY - test_house.free_area - test_house.width)):
                 if (a,b) not in bezet:
@@ -62,7 +61,7 @@ def greedy_algorithm(iterations, water_layout, max_houses):
                     if score > highest_score:
                         best_house = deepcopy(house)
                         highest_score = score
-            if name == "bungalow":
+            elif name == "bungalow":
                 house= House("bungalow",i, a, b)
                 if location_checker(house, temp_neighbourhood) == True:
                     temp_neighbourhood.append(house)
@@ -71,7 +70,7 @@ def greedy_algorithm(iterations, water_layout, max_houses):
                     if score > highest_score:
                         best_house = deepcopy(house)
                         highest_score = score
-            if name == "sfh":
+            elif name == "sfh":
                 house = House("sfh",i,a,b)
                 if location_checker(house, temp_neighbourhood) == True:
                     temp_neighbourhood.append(house)
@@ -93,12 +92,9 @@ def greedy_algorithm(iterations, water_layout, max_houses):
     df_greedy = pd.DataFrame(table, columns = ["iteration", "max_houses","score"])
     df_greedy.to_csv("results/"+ str(iterations)+"-"+str(max_houses)+"-greedy.csv")
     
-    # make a histogram of the scores from all the neighbourhoods made through the iterations
-    #plt.plot(df_greedy.iteration, df_greedy.score)
-    #plt.savefig("results/greedy_diagram-"+str(max_houses)+".png")
-    #plt.close()
-    
+
     # make a visualisation of the best random neighbourhood and save it
     visualise(neighbourhood, highest_score, "greedy_visualisation-" + str(max_houses))
 
+    # make a histogram of the scores from all the neighbourhoods made through the iterations
     performanceplot("Greedy", max_houses, "line", df_greedy.score, df_greedy.iteration)
