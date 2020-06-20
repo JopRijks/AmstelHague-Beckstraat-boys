@@ -4,12 +4,12 @@ from code.helpers.location import distanceCalc
 def scorecalculator(neighbourhood):
     # set score to 0
     score = 0
-
     # loop through every item in the neighbourhood that's not water
     for house in neighbourhood:
         if house.name != "WATER":
             # calculate the new house price with the price increasement from the extra free space
-            score += (house.price + house.price*house.price_increasement*(round_down(house.shortest_distance,0) - house.free_area))
+            house.score = (house.price + house.price*house.price_increasement*(round_down(house.shortest_distance,0) - house.free_area))
+            score += house.score
     # return the score
     return score
 
@@ -19,16 +19,27 @@ def round_down(n, decimals=0):
     # math.floor rounds the number down to the closest whole number below, though the multiplier we keep the wanted decimals
     return math.floor(n * multiplier) / multiplier
 
-def distance_check(neighbourhood):
-    house_b = neighbourhood[-1]
-    for house_a in neighbourhood[:-1]:
-        if house_a.name != "WATER" and house_b.name!="WATER": 
-            if house_a != house_b:
-                min_distance = distance_calculator(house_a,house_b)
-                if house_a.shortest_distance > min_distance:
-                    house_a.shortest_distance = min_distance
-                if house_b.shortest_distance > min_distance:
-                    house_b.shortest_distance = min_distance
+def distance_check(neighbourhood, version="efficient"):
+    if version == "efficient":
+        house_b = neighbourhood[-1]
+        for house_a in neighbourhood[:-1]:
+            if house_a.name != "WATER" and house_b.name!="WATER": 
+                if house_a != house_b:
+                    min_distance = distance_calculator(house_a,house_b)
+                    if house_a.shortest_distance > min_distance:
+                        house_a.shortest_distance = min_distance
+                    if house_b.shortest_distance > min_distance:
+                        house_b.shortest_distance = min_distance
+    else:
+        for house_a in neighbourhood:
+            for house_b in neighbourhood:
+                if house_a.name != "WATER" and house_b.name!="WATER": 
+                    if house_a != house_b:
+                        min_distance = distance_calculator(house_a,house_b)
+                        if house_a.shortest_distance > min_distance:
+                            house_a.shortest_distance = min_distance
+                        if house_b.shortest_distance > min_distance:
+                            house_b.shortest_distance = min_distance
     return neighbourhood
 
 def distance_calculator(house_a,house_b):

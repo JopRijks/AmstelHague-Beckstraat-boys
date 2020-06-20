@@ -43,5 +43,8 @@ def random_algorithm(iterations, water_layout, max_houses):
     plt.savefig("results/distribution_random"+str(max_houses)+".png")
     plt.close()
     
+    for i in best:
+        if i.name != "WATER":
+            print(i.score, i.shortest_distance)
     # make a visualisation of the best random neighbourhood and save it
     visualise(best, highest_score, "random_visualisation-"+ str(max_houses))
