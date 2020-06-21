@@ -1,3 +1,14 @@
+"""
+main.py
+
+Wordt gebruikt om een oplossing te vinden voor het Amstelhaege probleem.
+
+Programmeertheorie
+Universiteit van Amsterdam
+
+Jop Rijksbaron, Robin Spiers & Vincent Kleiman
+"""
+
 import sys
 import pandas as pd
 import random as rd

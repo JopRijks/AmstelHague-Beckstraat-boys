@@ -1,7 +1,12 @@
 """
 performance.py
 
-creates a plot of the performance of an algorithm
+Wordt gebruikt om een diagram te plotten van de prestaties van een algoritme.
+
+Programmeertheorie
+Universiteit van Amsterdam
+
+Jop Rijksbaron, Robin Spiers & Vincent Kleiman
 """
 
 import matplotlib.pyplot as plt

@@ -1,5 +1,12 @@
 """
 greedy.py
+
+Wordt voor het greedy algoritme gebruikt om volgens de greedy methode een wijk in te delen.
+
+Programmeertheorie
+Universiteit van Amsterdam
+
+Jop Rijksbaron, Robin Spiers & Vincent Kleiman
 """
 
 import pandas as pd

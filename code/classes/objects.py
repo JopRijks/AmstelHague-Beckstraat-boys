@@ -1,3 +1,14 @@
+"""
+objects.py
+
+Wordt gebruikt om de classes aan te maken.
+
+Programmeertheorie
+Universiteit van Amsterdam
+
+Jop Rijksbaron, Robin Spiers & Vincent Kleiman
+"""
+
 # door middel van object-oriented programming worden in dit bestand classes vastgesteld
 import random as rd
 

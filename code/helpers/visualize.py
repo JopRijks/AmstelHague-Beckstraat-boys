@@ -1,3 +1,14 @@
+"""
+visualize.py
+
+Wordt gebruikt om de kaart van de samengestelde wijk te visualiseren.
+
+Programmeertheorie
+Universiteit van Amsterdam
+
+Jop Rijksbaron, Robin Spiers & Vincent Kleiman
+"""
+
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as rect

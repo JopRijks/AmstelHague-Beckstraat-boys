@@ -1,3 +1,14 @@
+"""
+score.py
+
+Wordt gebruikt om de score van een wijkindeling te berekenen.
+
+Programmeertheorie
+Universiteit van Amsterdam
+
+Jop Rijksbaron, Robin Spiers & Vincent Kleiman
+"""
+
 import math
 from code.helpers.location import distanceCalc
 

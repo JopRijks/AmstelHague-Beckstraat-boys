@@ -1,5 +1,12 @@
 """
 random.py
+
+Wordt voor het random algoritme gebruikt om tot een willekeurige oplossing te komen.
+
+Programmeertheorie
+Universiteit van Amsterdam
+
+Jop Rijksbaron, Robin Spiers & Vincent Kleiman
 """
 
 import pandas as pd

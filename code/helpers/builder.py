@@ -1,3 +1,14 @@
+"""
+builder.py
+
+Wordt gebruikt om een wijkindeling samen te stellen die aan de vereisten voldoet.
+
+Programmeertheorie
+Universiteit van Amsterdam
+
+Jop Rijksbaron, Robin Spiers & Vincent Kleiman
+"""
+
 # in dit bestand komt een algoritme
 import pandas as pd
 

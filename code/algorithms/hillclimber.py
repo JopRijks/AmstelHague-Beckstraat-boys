@@ -1,5 +1,12 @@
 """
-hill climber
+hillclimber.py
+
+Wordt voor het hill climber algoritme gebruikt om met een aantal iteraties de hill climber methode toe te passen.
+
+Programmeertheorie
+Universiteit van Amsterdam
+
+Jop Rijksbaron, Robin Spiers & Vincent Kleiman
 """
 
 import pandas as pd

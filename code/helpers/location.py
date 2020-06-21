@@ -1,3 +1,15 @@
+"""
+location.py
+
+Wordt gebruikt om de vrijstand van een huis te berekenen en om 
+te controleren of de locatie van een huis aan de vereisten voldoet.
+
+Programmeertheorie
+Universiteit van Amsterdam
+
+Jop Rijksbaron, Robin Spiers & Vincent Kleiman
+"""
+
 def location_checker(house, neighbourhood):
     # vertical wall check - horizontal wall check - inside check
     mindistance= []
