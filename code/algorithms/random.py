@@ -21,36 +21,42 @@ def random_algorithm(iterations, water_layout, max_houses):
     amount_sfh, amount_bungalow, amount_maison = max_houses * fraction_sfh, max_houses * fraction_bungalow, max_houses * fraction_maison
 
     highest_score, best, table = 0, 0, []
-    # iterate through different creations of the neighbourhood
+    
+    # performe the algorithm for a number of iterations
     for i in range(iterations):
+        
         # create neighbourhood, place water and build houses, collect neighbourhood and score
         neighbourhood = []
         neighbourhood = waterbuilder(water_layout, neighbourhood)
         neighbourhood, score = housebuilder(max_houses, amount_maison,amount_bungalow,amount_sfh, neighbourhood)
-        
-        # add iteration number, max_houses and score to the table
-        table.append([i, max_houses, score])
-        
+
         # if the score of the neighbourhood in this iteration is the highest till now than save the neighbourhood and the score
         if score > highest_score:
             best = neighbourhood
             highest_score = score
-    
-    # save the information from the iteration
-    df_random = pd.DataFrame(table, columns = ["iteration", "max_houses","score"]).set_index("iteration")
-    df_random.to_csv("results/"+ str(iterations)+"-"+str(max_houses)+"-random.csv")
-    
-    # make a histogram of the scores from all the neighbourhoods made through the iterations
-    #df_random.hist(column = "score")
-    #plt.savefig("results/distribution_random"+str(max_houses)+".png")
-    #plt.close()
 
-    # make a visualisation of the best random neighbourhood and save it
+        # store information in table
+        
+        ### OLD
+        #table.append([i, max_houses, score])
+    
+    # make a visualisation of the best random neighbourhood and save it as an image
     visualise(best, highest_score, "random_visualisation-"+ str(max_houses))
 
-    # make a plot of the algorithms performance
-    #sns.set(style="darkgrid")
-    #sns_plot = sns.distplot(df_random.score)
-    #sns_plot.figure.savefig("results/distplot_random-"+str(max_houses)+".png")
+    for i in best:
+        corner_1 = str(int(i.x0)) + "," + str(int(i.y0))
+        corner_2 = str(int(i.y1)) + "," + str(int(i.y0))
+        corner_3 = str(int(i.y1)) + "," + str(int(i.x1))
+        corner_4 = str(int(i.x0)) + "," + str(int(i.x1))
+        table.append([i.id, corner_1, corner_2, corner_3, corner_4, i.name])
+    
+    table.append(["networth", highest_score])
 
-    performanceplot("random", max_houses, "dist", df_random.score)
+    # turn the table into a dataframe
+    df_random = pd.DataFrame(table, columns=["structure", "corner_1", "corner_2", "corner_3", "corner_4", "type"]).set_index("structure")
+
+    # save the dataframe as a csv file
+    df_random.to_csv("results/output.csv")
+
+    # make a plot of the algorithms performance
+    #performanceplot("random", max_houses, "dist", df_random.score)
