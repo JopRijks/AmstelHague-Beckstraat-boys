@@ -17,10 +17,11 @@ from code.helpers.location import location_checker
 from code.helpers.performance import performanceplot
 
 def greedy_algorithm(iterations, water_layout, max_houses):
- # standard neighbourhood distribution of the houses
+    # standard neighbourhood distribution of the houses
     fraction_bungalow,fraction_maison = 0.25, 0.15
     amount_bungalow, amount_maison =  max_houses * fraction_bungalow, max_houses * fraction_maison
     highest_score, table = 0, []
+    
     # create neighbourhood, place water and build houses, collect neighbourhood and score
     neighbourhood = []
     neighbourhood = waterbuilder(water_layout, neighbourhood)
@@ -92,9 +93,8 @@ def greedy_algorithm(iterations, water_layout, max_houses):
     df_greedy = pd.DataFrame(table, columns = ["iteration", "max_houses","score"])
     df_greedy.to_csv("results/"+ str(iterations)+"-"+str(max_houses)+"-greedy.csv")
     
-
     # make a visualisation of the best random neighbourhood and save it
     visualise(neighbourhood, highest_score, "greedy_visualisation-" + str(max_houses))
 
     # make a histogram of the scores from all the neighbourhoods made through the iterations
-    performanceplot("Greedy", max_houses, "line", df_greedy.score, df_greedy.iteration)
+    performanceplot("Greedy", max_houses, "line", df_greedy.iteration, df_greedy.score)

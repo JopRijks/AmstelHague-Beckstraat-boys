@@ -14,14 +14,14 @@ def performanceplot(algorithm, n, plottype, x, y=None):
     # create a histogram
     if plottype == "dist":
         ax = sns.distplot(x)
-        ax.set_xlabel("Score (in Euros)")
+        ax.set_xlabel("Score (€)")
         ax.set_ylabel("Iterations")
     
     # create a line diagram
     if plottype == "line":
         ax = sns.lineplot(x, y)
         ax.set_xlabel("Iterations")
-        ax.set_ylabel("Score (in Euros)")
+        ax.set_ylabel("Score (€)")
 
     ax.set_title("{} algorithm for {} houses".format(algorithm, n))
 
