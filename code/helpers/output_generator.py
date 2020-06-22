@@ -24,7 +24,7 @@ def output(neighbourhood, score):
         table.append([str(i.name)+"_"+ str(i.id), corner_1, corner_2, corner_3, corner_4, i.name])
     
     # the last row of the table needs to have the networth value
-    table.append(["networth", score])
+    table.append(["networth", int(score)])
 
     # turn the table into a dataframe
     df = pd.DataFrame(table, columns=["structure", "corner_1", "corner_2", "corner_3", "corner_4", "type"]).set_index("structure")
