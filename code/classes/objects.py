@@ -65,9 +65,11 @@ class House:
             x = rd.randrange(self.free_area, (Borders().maxX - self.free_area - self.width))
             y = rd.randrange(self.free_area, (Borders().maxY - self.free_area - self.length))
         
-        
+        # set score and id
         self.score = 0
         self.id = house_number
+
+        # make the shortest distance the maximum distance, this the euclidean distance between both outer grid corners
         self.shortest_distance = (Borders().maxY**2+Borders().maxX**2)**0.5
 
         # make from the coordinates from one corner the other coordinates

@@ -17,11 +17,12 @@ import matplotlib.collections as coll
 from code.classes.objects import Borders
 
 def visualise(nb, score, x=None):
+    # set axis 
     ax = plt.axes()
-
     ax.set_xlim(0,Borders().maxX)
     ax.set_ylim(0,Borders().maxY)
 
+    # set background color
     ax.set_facecolor("lightgreen")
 
     # title of the plot is the score in correct currency formatting
@@ -31,28 +32,29 @@ def visualise(nb, score, x=None):
     title = new_score_main + "," + score_fractional
     ax.set_title(title)
 
+    # check if object is water or a kind of house and every kind of object gets another colour and size assigned and is placed in a grid
     for i in range(len(nb)):
-        if nb[i].type == "maison":
-            maison = coll.PatchCollection([rect.Rectangle((nb[i].x0,nb[i].y0), 12, 10)])
-            maison.set_color("plum")
-            ax.add_collection(maison)
-        
-        if nb[i].type == "bungalow":
-            bungalow = coll.PatchCollection([rect.Rectangle((nb[i].x0,nb[i].y0), 11, 7)])
-            bungalow.set_color("burlywood")
-            ax.add_collection(bungalow)
-
-        if nb[i].type == "sfh":          
-            sfh = coll.PatchCollection([rect.Rectangle((nb[i].x0,nb[i].y0), 8, 8)])
-            sfh.set_color("indianred")
-            ax.add_collection(sfh)
-
-        if nb[i].type == "WATER":
+        if nb[i].name == "WATER":
             waterLocation = rect.Rectangle((nb[i].x0, nb[i].y0), nb[i].width, nb[i].length)
             water = coll.PatchCollection([waterLocation])
             water.set_color("lightskyblue")
             ax.add_collection(water)
     
-    if x != None:
-        plt.savefig("results/" + str(x) + ".png")
+        elif nb[i].type == "maison":
+            maison = coll.PatchCollection([rect.Rectangle((nb[i].x0,nb[i].y0), 12, 10)])
+            maison.set_color("plum")
+            ax.add_collection(maison)
+        
+        elif nb[i].type == "bungalow":
+            bungalow = coll.PatchCollection([rect.Rectangle((nb[i].x0,nb[i].y0), 11, 7)])
+            bungalow.set_color("burlywood")
+            ax.add_collection(bungalow)
+
+        elif nb[i].type == "sfh":          
+            sfh = coll.PatchCollection([rect.Rectangle((nb[i].x0,nb[i].y0), 8, 8)])
+            sfh.set_color("indianred")
+            ax.add_collection(sfh)
+
+    # save the file in the results folder and close it
+    plt.savefig("results/" + str(x) + ".png")
     plt.close()

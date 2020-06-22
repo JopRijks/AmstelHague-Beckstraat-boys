@@ -33,7 +33,7 @@ if __name__ == "__main__":
     # check if number of input arguments is correct
     if len(sys.argv) != 5:
         print("wrong input \n use: [approach] [iterations] [number of houses] [water map]")
-        print("approach: random, hillcliber or greedy")
+        print("approach: random, hillcliber, greedy or greedy-hillclimber")
         print("iterations: just a positive number")
         print("number of houses: choose 20, 40 or 60")
         print("water map: choose 0, 1 or 2")
@@ -74,6 +74,7 @@ if __name__ == "__main__":
     elif approach == "greedy":
         neighbourhood, score = greedy_algorithm(iterations, water_layout, n_houses)
 
+    # execute greed-hillclimber algorithm
     elif approach == "greedy-hillclimber":
         neighbourhood, score = greedy_algorithm(iterations, water_layout, n_houses)
         neighbourhood, score = hillclimber_algorithm(iterations, water_layout, n_houses, neighbourhood, score)

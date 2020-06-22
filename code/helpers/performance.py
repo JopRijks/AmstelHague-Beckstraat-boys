@@ -33,3 +33,4 @@ def performanceplot(algorithm, n, plottype, x, y=None):
 
     # save plot as image
     ax.figure.savefig("results/"+plottype+"plot_"+algorithm+"-"+str(n)+".png")
+    plt.close()
