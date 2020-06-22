@@ -18,10 +18,10 @@ def output(neighbourhood, score):
     # for every house all the corners, name and id are saved in the table
     for i in neighbourhood:
         corner_1 = str(int(i.x0)) + "," + str(int(i.y0))
-        corner_2 = str(int(i.y1)) + "," + str(int(i.y0))
-        corner_3 = str(int(i.y1)) + "," + str(int(i.x1))
-        corner_4 = str(int(i.x0)) + "," + str(int(i.x1))
-        table.append([str(i.name)+"_"+ str(i.id), corner_1, corner_2, corner_3, corner_4, i.name])
+        corner_2 = str(int(i.x0)) + "," + str(int(i.y1))
+        corner_3 = str(int(i.x1)) + "," + str(int(i.y1))
+        corner_4 = str(int(i.x1)) + "," + str(int(i.y0))
+        table.append([str(i.name)+"_"+str(i.id), corner_1, corner_2, corner_3, corner_4, i.name])
     
     # the last row of the table needs to have the networth value
     table.append(["networth", int(score)])
