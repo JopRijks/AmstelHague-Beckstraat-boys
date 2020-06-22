@@ -26,9 +26,10 @@ from code.algorithms.hillclimber import hillclimber_algorithm
 from code.algorithms.greedy import greedy_algorithm
 
 if __name__ == "__main__":
+    # set time from start algorithm 
+    t1 = time.time()
 
     ##################### set variables through command line input
-    t1 = time.time()
     # check if number of input arguments is correct
     if len(sys.argv) != 5:
         print("wrong input \n use: [approach] [iterations] [number of houses] [water map]")
@@ -71,18 +72,20 @@ if __name__ == "__main__":
 
     # execute greedy algorithm
     elif approach == "greedy":
-       neighbourhood, score = greedy_algorithm(iterations, water_layout, n_houses)
+        neighbourhood, score = greedy_algorithm(iterations, water_layout, n_houses)
 
     elif approach == "greedy-hillclimber":
         neighbourhood, score = greedy_algorithm(iterations, water_layout, n_houses)
         neighbourhood, score = hillclimber_algorithm(iterations, water_layout, n_houses, neighbourhood, score)
         
-    #if no algorithm is specified execute random algorithm
+    # if no algorithm or random is specified execute random algorithm
     else:
         neighbourhood, score = random_algorithm(iterations, water_layout, n_houses)
     
+    # create the wanted output and print the dataframe
     output = output(neighbourhood,score)
     print(output)
     
+    # set time from end algorithm and print the total duration
     t2 = time.time()
     print("Duration of algorithm: {} seconds".format(t2-t1))

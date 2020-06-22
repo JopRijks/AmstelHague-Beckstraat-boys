@@ -13,6 +13,8 @@ def output(neighbourhood, score):
 
     # turn the table into a dataframe
     df = pd.DataFrame(table, columns=["structure", "corner_1", "corner_2", "corner_3", "corner_4", "type"]).set_index("structure")
-
     # save the dataframe as a csv file
+    df.to_csv("output.csv")
+    
+    # return the dataframe
     return df

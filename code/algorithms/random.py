@@ -38,7 +38,7 @@ def random_algorithm(iterations, water_layout, max_houses):
         neighbourhood, new_score = housebuilder(max_houses, amount_maison,amount_bungalow,amount_sfh, neighbourhood)
 
         # if the score of the neighbourhood in this iteration is the highest till now than save the neighbourhood and the score
-        if score > highest_score:
+        if new_score > highest_score:
             best = neighbourhood
             score = new_score
 
