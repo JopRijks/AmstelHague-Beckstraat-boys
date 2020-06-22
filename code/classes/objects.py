@@ -34,7 +34,7 @@ class House:
     def __init__(self, type, house_number, x=None, y=None):
 
         if type == "sfh":
-            self.name = "sfh"
+            self.name = "EENGEZINSWONING"
             self.length = 8
             self.width = 8
             self.price = 285000
@@ -42,7 +42,7 @@ class House:
             self.price_increasement = float(0.03)
 
         if type == "bungalow":
-            self.name = "bungalow"
+            self.name = "BUNGALOW"
             self.length = 7
             self.width = 11
             self.price = 399000
@@ -50,7 +50,7 @@ class House:
             self.price_increasement = float(0.04)
 
         if type == "maison":
-            self.name = "maison"
+            self.name = "MAISON"
             self.length = 10
             self.width = 12
             self.price = 610000
