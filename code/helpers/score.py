@@ -62,7 +62,8 @@ def distance_check(neighbourhood, version="efficient"):
     for ID, House in houses.items():
         
         # remove the house from the neighbourhood and get the distance from the house
-        rest_of_neighbourhood = list(poly_houses).remove(House)
+        rest_of_neighbourhood = list(poly_houses)
+        rest_of_neighbourhood.remove(House)
         shortest_distance[ID] = float(House.distance(MultiPolygon(rest_of_neighbourhood)))
     
     # loop through the neighbourhood and update shortest distance
