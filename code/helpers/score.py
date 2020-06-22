@@ -87,9 +87,10 @@ def distance_calculator(house_a,house_b):
     distances= []
 
     # make a list with all the occupied grid places on x or y axis
-    vert = list(range(house_a.y0-1, house_a.y1+1))
-    horz = list(range(house_a.x0-1, house_a.x1+1))
-
+    vert = list(range(house_a.y0, house_a.y1))
+    horz = list(range(house_a.x0, house_a.x1))
+    print(house_a.x0, house_a.x1, house_a.y0, house_a.y1)
+    print(house_b.x0, house_b.x1, house_b.y0, house_b.y1)
     # check if house is on left or right side of house
     if house_b.y0 in vert or house_b.y1 in vert:
         distances += [abs(house_a.x0-house_b.x0),abs(house_a.x1-house_b.x0),abs(house_a.x0-house_b.x1),abs(house_a.x1-house_b.x1)]
@@ -99,26 +100,26 @@ def distance_calculator(house_a,house_b):
         distances += [abs(house_a.y0-house_b.y0),abs(house_a.y1-house_b.y0),abs(house_a.y0-house_b.y1),abs(house_a.y1-house_b.y1)]
 
     else:
-
         # check if the shortest distance is diagonal
-        if house_a.y1 < house_b.y0:
+        if house_a.y1 <= house_b.y0:
 
             # upper right
-            if house_a.x1 < house_b.x0:
+            if house_a.x1 <= house_b.x0:
                 distances += [distanceCalc(house_a.x1,house_a.y1,house_b.x0,house_b.y0)]
 
             # upper left
             else:
                 distances += [distanceCalc(house_a.x0,house_a.y1,house_b.x1,house_b.y0)]
-        elif house_a.y1 > house_b.y0:
+        elif house_a.y1 >= house_b.y0:
 
             # down right
-            if house_a.x1 < house_b.x0:
+            if house_a.x1 <= house_b.x0:
                 distances += [distanceCalc(house_a.x1,house_a.y0,house_b.x0,house_b.y1)]
 
             # down left
             else:
                 distances += [distanceCalc(house_a.x0,house_a.y0,house_b.x1,house_b.y1)]
                 
-    # get the minimum distance and return it 
+    # get the minimum distance and return it
+    print(min(distances)) 
     return min(distances)
