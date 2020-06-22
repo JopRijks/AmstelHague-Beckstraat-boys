@@ -35,35 +35,21 @@ def random_algorithm(iterations, water_layout, max_houses):
         # create neighbourhood, place water and build houses, collect neighbourhood and score
         neighbourhood = []
         neighbourhood = waterbuilder(water_layout, neighbourhood)
-        neighbourhood, score = housebuilder(max_houses, amount_maison,amount_bungalow,amount_sfh, neighbourhood)
+        neighbourhood, new_score = housebuilder(max_houses, amount_maison,amount_bungalow,amount_sfh, neighbourhood)
 
         # if the score of the neighbourhood in this iteration is the highest till now than save the neighbourhood and the score
         if score > highest_score:
             best = neighbourhood
-            highest_score = score
+            score = new_score
 
-        # store information in table
-        
-        ### OLD
-        #table.append([i, max_houses, score])
-    
+        table.append([i, max_houses, score])
+    df_random = pd.DataFrame(table, columns = ["iteration", "max_houses", "score"])
+    df_random.to_csv("results/" + str(iterations) + "-" + str(max_houses) + "-random.csv")
+
     # make a visualisation of the best random neighbourhood and save it as an image
     visualise(best, highest_score, "random_visualisation-"+ str(max_houses))
 
-    for i in best:
-        corner_1 = str(int(i.x0)) + "," + str(int(i.y0))
-        corner_2 = str(int(i.y1)) + "," + str(int(i.y0))
-        corner_3 = str(int(i.y1)) + "," + str(int(i.x1))
-        corner_4 = str(int(i.x0)) + "," + str(int(i.x1))
-        table.append([i.id, corner_1, corner_2, corner_3, corner_4, i.name])
-    
-    table.append(["networth", highest_score])
-
-    # turn the table into a dataframe
-    df_random = pd.DataFrame(table, columns=["structure", "corner_1", "corner_2", "corner_3", "corner_4", "type"]).set_index("structure")
-
-    # save the dataframe as a csv file
-    df_random.to_csv("results/output.csv")
-
     # make a plot of the algorithms performance
-    #performanceplot("random", max_houses, "dist", df_random.score)
+    performanceplot("random", max_houses, "dist", df_random.score)
+
+    return neighbourhood, score

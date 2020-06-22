@@ -20,6 +20,7 @@ import time
 from code.helpers.score import scorecalculator
 from code.helpers.visualize import visualise
 from code.helpers.builder import waterbuilder, housebuilder
+from code.helpers.output_generator import output
 from code.algorithms.random import random_algorithm
 from code.algorithms.hillclimber import hillclimber_algorithm
 from code.algorithms.greedy import greedy_algorithm
@@ -36,11 +37,6 @@ if __name__ == "__main__":
         print("number of houses: choose 20, 40 or 60")
         print("water map: choose 0, 1 or 2")
         exit()
-        # approach = "random"
-        # iterations = 100
-        # n_houses = 20
-        # water_layout = 0
-
     else:
 
         # algorithm of choice can be random or hill climber
@@ -71,15 +67,22 @@ if __name__ == "__main__":
 
     # execute hill climber algorithm
     if approach == "hillclimber":
-        hillclimber_algorithm(iterations, water_layout, n_houses)
+        neighbourhood, score = hillclimber_algorithm(iterations, water_layout, n_houses)
 
     # execute greedy algorithm
     elif approach == "greedy":
-       greedy_algorithm(iterations, water_layout, n_houses)
+       neighbourhood, score = greedy_algorithm(iterations, water_layout, n_houses)
 
+    elif approach == "greedy-hillclimber":
+        neighbourhood, score = greedy_algorithm(iterations, water_layout, n_houses)
+        neighbourhood, score = hillclimber_algorithm(iterations, water_layout, n_houses, neighbourhood, score)
+        
     #if no algorithm is specified execute random algorithm
     else:
-        random_algorithm(iterations, water_layout, n_houses)
+        neighbourhood, score = random_algorithm(iterations, water_layout, n_houses)
+    
+    output = output(neighbourhood,score)
+    print(output)
     
     t2 = time.time()
-    print(t2-t1)
+    print("Duration of algorithm: {} seconds".format(t2-t1))

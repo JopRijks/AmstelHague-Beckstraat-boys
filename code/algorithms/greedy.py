@@ -65,36 +65,36 @@ def greedy_algorithm(iterations, water_layout, max_houses):
                 if location_checker(house, temp_neighbourhood) == True:
                     temp_neighbourhood.append(house)
                     temp_neighbourhood = distance_check(temp_neighbourhood)
-                    score = scorecalculator(temp_neighbourhood)
-                    if score > highest_score:
+                    new_score = scorecalculator(temp_neighbourhood)
+                    if new_score > highest_score:
                         best_house = deepcopy(house)
-                        highest_score = score
+                        highest_score = new_score
             elif name == "bungalow":
                 house= House("bungalow",i, a, b)
                 if location_checker(house, temp_neighbourhood) == True:
                     temp_neighbourhood.append(house)
                     temp_neighbourhood = distance_check(temp_neighbourhood)
-                    score = scorecalculator(temp_neighbourhood)
-                    if score > highest_score:
+                    new_score = scorecalculator(temp_neighbourhood)
+                    if new_score > highest_score:
                         best_house = deepcopy(house)
-                        highest_score = score
+                        highest_score = new_score
             elif name == "sfh":
                 house = House("sfh",i,a,b)
                 if location_checker(house, temp_neighbourhood) == True:
                     temp_neighbourhood.append(house)
                     temp_neighbourhood = distance_check(temp_neighbourhood)
-                    score = scorecalculator(temp_neighbourhood)
-                    if score > highest_score:
+                    new_score = scorecalculator(temp_neighbourhood)
+                    if new_score > highest_score:
                         best_house = deepcopy(house)
-                        highest_score = score
+                        highest_score = new_score
         
         neighbourhood.append(best_house)
         for i in range(best_house.x0,best_house.x1):
             for j in range(best_house.y0, best_house.y1):
                 bezet += [(i,j)]
         neighbourhood = distance_check(neighbourhood)
-        total_score = scorecalculator(neighbourhood)
-        table.append([i, max_houses, total_score])
+        score = scorecalculator(neighbourhood)
+        table.append([i, max_houses, score])
 
     # save the information from the iteration
     df_greedy = pd.DataFrame(table, columns = ["iteration", "max_houses","score"])
@@ -105,3 +105,5 @@ def greedy_algorithm(iterations, water_layout, max_houses):
 
     # make a histogram of the scores from all the neighbourhoods made through the iterations
     performanceplot("Greedy", max_houses, "line", df_greedy.iteration, df_greedy.score)
+
+    return neighbourhood, score

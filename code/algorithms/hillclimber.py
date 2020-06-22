@@ -25,21 +25,26 @@ from code.helpers.location import location_checker
 from code.classes.objects import Borders, House
 from code.helpers.performance import performanceplot
 
-def hillclimber_algorithm(iterations, water_layout, max_houses):
+def hillclimber_algorithm(iterations, water_layout, max_houses, neighbourhood=None, score = None):
 
     ################################ start by creating a random neighbourhood ###################
     
     # standard neighbourhood distribution of the houses
     amount_sfh, amount_bungalow, amount_maison = max_houses*0.6, max_houses*0.25, max_houses*0.15
 
+    if neighbourhood != None:
+        file_name = "greedy_hilclimber"
+    else:
+        file_name = "hillclimber"
+        
     # create table
     table = []
+    if neighbourhood == None:
+        # create neighbourhood, place water and build houses, collect neighbourhood and score
+        neighbourhood = []
+        neighbourhood = waterbuilder(water_layout, neighbourhood)
+        neighbourhood, score = housebuilder(max_houses, amount_maison, amount_bungalow, amount_sfh, neighbourhood)
 
-    # create neighbourhood, place water and build houses, collect neighbourhood and score
-    neighbourhood = []
-    neighbourhood = waterbuilder(water_layout, neighbourhood)
-    neighbourhood, score = housebuilder(max_houses, amount_maison, amount_bungalow, amount_sfh, neighbourhood)
-    
     ################################ now iterate using the hill climber method ####################
 
     # for loop through iterations
@@ -71,15 +76,14 @@ def hillclimber_algorithm(iterations, water_layout, max_houses):
         table.append([i, max_houses, score, new_score])
 
     # save results in csv file
-    df_hillclimber = pd.DataFrame(table, columns = ["iteration", "max_houses", "old_score", "new_score"])
-    df_hillclimber.to_csv("results/" + str(iterations) + "-" + str(max_houses) + "-hillclimber.csv")
 
-    # create a plot of the progress
-    #plt.plot(df_hillclimber.iteration, df_hillclimber.old_score)
-    #plt.savefig("results/hillclimber_diagram"+str(max_houses)+".png")
-    #plt.close()
+    df_hillclimber = pd.DataFrame(table, columns = ["iteration", "max_houses", "old_score", "new_score"])
+    df_hillclimber.to_csv("results/" + str(iterations) + "-" + str(max_houses) +"-" + file_name +".csv")
 
     # make a visualisation of the best score and save it
-    visualise(neighbourhood, score, "hillclimber_visualisation-"+str(max_houses))
+    visualise(neighbourhood, score, file_name+"_visualisation-"+str(max_houses))
+    
+    # create a plot of the progress
+    performanceplot(file_name, max_houses, "line", df_hillclimber.iteration, df_hillclimber.old_score)
 
-    performanceplot("Hill climber", max_houses, "line", df_hillclimber.iteration, df_hillclimber.old_score)
+    return neighbourhood, score
