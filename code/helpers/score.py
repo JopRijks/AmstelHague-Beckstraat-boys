@@ -24,7 +24,7 @@ def scorecalculator(neighbourhood):
         if house.name != "WATER":
 
             # calculate the new house price with the price increasement from the extra free space
-            house.score = house.price*(1 + house.price_increasement*(round_down(house.shortest_distance,0) - house.free_area))
+            house.score = house.price*(1 + house.price_increasement*(round_down(house.shortest_distance,0)))
             score += house.score
 
     # return the score
@@ -64,7 +64,7 @@ def distance_check(neighbourhood, version="efficient"):
         # remove the house from the neighbourhood and get the distance from the house
         rest_of_neighbourhood = list(poly_houses)
         rest_of_neighbourhood.remove(House)
-        shortest_distance[ID] = float(House.distance(MultiPolygon(rest_of_neighbourhood)))
+        shortest_distance[ID] = math.floor(House.distance(MultiPolygon(rest_of_neighbourhood)))
     
     # loop through the neighbourhood and update shortest distance
     for i in neighbourhood:
