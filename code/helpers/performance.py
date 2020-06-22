@@ -13,6 +13,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 def performanceplot(algorithm, n, plottype, x, y=None):
+    
     # make a plot of the algorithms performance
     sns.set(style="darkgrid")
     
