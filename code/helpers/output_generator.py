@@ -11,6 +11,7 @@ Jop Rijksbaron, Robin Spiers & Vincent Kleiman
 import pandas as pd
 
 def output(neighbourhood, score):
+    
     # create the table
     table = []
 

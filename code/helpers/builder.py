@@ -18,10 +18,13 @@ from code.helpers.location import location_checker
 from code.helpers.score import scorecalculator, distance_check
 
 def waterbuilder(choice, neighbourhood):
+    
     # collect all csv files and convert them to pandas dataframe and select the wanted file with the choice variable
     df = [pd.read_csv("data/wijk_1.csv"),pd.read_csv("data/wijk_2.csv"),pd.read_csv("data/wijk_3.csv")][choice]
+
     # loop through all dataframe rows
     for index, rows in df.iterrows(): 
+
     # Collect all the wanted data from the dataframe row
         ID = index
         name = rows.type
@@ -35,10 +38,12 @@ def waterbuilder(choice, neighbourhood):
         # make from the collected values a water object and append it to the neighbourhood
         water = Water(ID,name, width, length, x0,x1,y0,y1)
         neighbourhood.append(water)
+
     # return the neighbourhood
     return neighbourhood
 
 def housebuilder(max_houses,amount_maison,amount_bungalow,amount_sfh, neighbourhood):
+
     # loop for every house that has to be placed
     for i in range(max_houses):
 

@@ -60,7 +60,7 @@ class House:
             self.free_area = 6
             self.price_increasement = float(0.06)
 
-        # make coordinates if these are note given
+        # make coordinates if these are not given
         if x==None or y==None:
             x = rd.randrange(self.free_area, (Borders().maxX - self.free_area - self.width))
             y = rd.randrange(self.free_area, (Borders().maxY - self.free_area - self.length))
