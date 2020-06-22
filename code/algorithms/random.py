@@ -47,7 +47,7 @@ def random_algorithm(iterations, water_layout, max_houses):
     df_random.to_csv("results/" + str(iterations) + "-" + str(max_houses) + "-random.csv")
 
     # make a visualisation of the best random neighbourhood and save it as an image
-    visualise(best, highest_score, "random_visualisation-"+ str(max_houses))
+    visualise(best, score, "random_visualisation-"+ str(max_houses))
 
     # make a plot of the algorithms performance
     performanceplot("random", max_houses, "dist", df_random.score)

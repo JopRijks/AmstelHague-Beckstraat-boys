@@ -13,8 +13,6 @@ Jop Rijksbaron, Robin Spiers & Vincent Kleiman
 def location_checker(house, neighbourhood):
     # vertical wall check - horizontal wall check - inside check
     mindistance= []
-    vert = list(range(house.y0, house.y1))
-    horz = list(range(house.x0, house.x1))
     for i in neighbourhood:
         if i.name == "WATER":
             horzWater = list(range(i.x0, i.x1))
@@ -28,14 +26,14 @@ def location_checker(house, neighbourhood):
             elif (house.x1 in horzWater and house.y1 in vertWater):
                 return False     
         else:
-            if (house.x0 -2 <= i.x0 and house.x1+2 >= i.x0) or (house.x0-2 <= i.x1 and house.x1+2 >= i.x1):
-                if (house.y0-2 <= i.y0 and house.y1+2 >= i.y0) or (house.y0-2 <= i.y1 and house.y1+2 >= i.y1):
+            if (house.x0 -1 <= i.x0 and house.x1+1 >= i.x0) or (house.x0-1 <= i.x1 and house.x1+1 >= i.x1):
+                if (house.y0-1 <= i.y0 and house.y1+1 >= i.y0) or (house.y0-1 <= i.y1 and house.y1+1 >= i.y1):
                     return False
-            if i.y0 in vert or i.y1 in vert:
+            if (house.y0-1 <= i.y0 and house.y1+1 >= i.y0) or (house.y0-1 <= i.y1 and house.y1+1 >= i.y1):
                 min_distance = min([abs(house.x0-i.x1),abs(house.x1-i.x0),abs(house.x1-i.x1),abs(house.x0-i.x0)])   
                 if house.free_area > abs(min_distance) or i.free_area > abs(min_distance): #absolute omdat anders negatieve afstanden
                     return False
-            elif i.x0 in horz or i.x1 in horz:
+            elif (house.x0 -1 <= i.x0 and house.x1+1 >= i.x0) or (house.x0-1 <= i.x1 and house.x1+1 >= i.x1):
                 min_distance = min([abs(house.y0-i.y1),abs(house.y1-i.y0),abs(house.y1-i.y1),abs(house.y0-i.y0)])         
                 if house.free_area > abs(min_distance) or i.free_area > abs(min_distance): #absolute omdat anders negatieve afstanden
                     return False
