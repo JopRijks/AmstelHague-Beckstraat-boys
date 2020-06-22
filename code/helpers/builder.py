@@ -28,10 +28,10 @@ def waterbuilder(choice, neighbourhood):
     # Collect all the wanted data from the dataframe row
         ID = index
         name = rows.type
-        x0 = int(rows.bottom_left_xy.split(',')[0])
-        x1 = int(rows.top_right_xy.split(',')[0])
-        y0 = int(rows.bottom_left_xy.split(',')[1])
-        y1 = int(rows.top_right_xy.split(',')[1])
+        x0 = int(rows.bottom_left_xy.split(',')[1])
+        x1 = int(rows.top_right_xy.split(',')[1])
+        y0 = int(rows.bottom_left_xy.split(',')[0])
+        y1 = int(rows.top_right_xy.split(',')[0])
         width = abs(x0-x1)
         length = abs(y0-y1)
 
