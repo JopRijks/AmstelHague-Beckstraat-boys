@@ -35,6 +35,7 @@ class House:
 
         if type == "sfh":
             self.name = "EENGEZINSWONING"
+            self.type = "sfh"
             self.length = 8
             self.width = 8
             self.price = 285000
@@ -43,6 +44,7 @@ class House:
 
         if type == "bungalow":
             self.name = "BUNGALOW"
+            self.type = "bungalow"
             self.length = 7
             self.width = 11
             self.price = 399000
@@ -51,6 +53,7 @@ class House:
 
         if type == "maison":
             self.name = "MAISON"
+            self.type = "maison"
             self.length = 10
             self.width = 12
             self.price = 610000

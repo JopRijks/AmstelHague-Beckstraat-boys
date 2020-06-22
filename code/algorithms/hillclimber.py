@@ -56,9 +56,9 @@ def hillclimber_algorithm(iterations, water_layout, max_houses, neighbourhood=No
         # choose a random house
         random_house = rd.choice([h for h in temp_neighbourhood if h.name != "WATER"])
         temp_neighbourhood.remove(random_house)
-        type_house = random_house.name
+        type_house = random_house.type
 
-        house = House(type_house, "changed-"+str(i))
+        house = House(type_house,str(i))
         if location_checker(house, temp_neighbourhood) == False:
             while location_checker(house, temp_neighbourhood) == False:
                 house = House(type_house, i)

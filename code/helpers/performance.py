@@ -28,6 +28,7 @@ def performanceplot(algorithm, n, plottype, x, y=None):
         ax.set_xlabel("Iterations")
         ax.set_ylabel("Score (€)")
 
+    # create title
     ax.set_title("{} algorithm for {} houses".format(algorithm, n))
 
     # save plot as image

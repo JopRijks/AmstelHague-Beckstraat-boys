@@ -32,22 +32,22 @@ def visualise(nb, score, x=None):
     ax.set_title(title)
 
     for i in range(len(nb)):
-        if nb[i].name == "maison":
+        if nb[i].type == "maison":
             maison = coll.PatchCollection([rect.Rectangle((nb[i].x0,nb[i].y0), 12, 10)])
             maison.set_color("plum")
             ax.add_collection(maison)
         
-        if nb[i].name == "bungalow":
+        if nb[i].type == "bungalow":
             bungalow = coll.PatchCollection([rect.Rectangle((nb[i].x0,nb[i].y0), 11, 7)])
             bungalow.set_color("burlywood")
             ax.add_collection(bungalow)
 
-        if nb[i].name == "sfh":          
+        if nb[i].type == "sfh":          
             sfh = coll.PatchCollection([rect.Rectangle((nb[i].x0,nb[i].y0), 8, 8)])
             sfh.set_color("indianred")
             ax.add_collection(sfh)
 
-        if nb[i].name == "WATER":
+        if nb[i].type == "WATER":
             waterLocation = rect.Rectangle((nb[i].x0, nb[i].y0), nb[i].width, nb[i].length)
             water = coll.PatchCollection([waterLocation])
             water.set_color("lightskyblue")
