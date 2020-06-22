@@ -33,10 +33,10 @@ def hillclimber_algorithm(iterations, water_layout, max_houses, neighbourhood=No
     amount_sfh, amount_bungalow, amount_maison = max_houses*0.6, max_houses*0.25, max_houses*0.15
 
     if neighbourhood != None:
-        file_name = "greedy_hilclimber"
+        file_name = "greedy-hilclimber"
     else:
         file_name = "hillclimber"
-        
+
     # create table
     table = []
     if neighbourhood == None:
