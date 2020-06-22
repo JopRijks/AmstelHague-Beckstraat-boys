@@ -56,27 +56,34 @@ def hillclimber_algorithm(iterations, water_layout, max_houses, neighbourhood=No
         # choose a random house
         random_house = rd.choice([h for h in temp_neighbourhood if h.name != "WATER"])
         temp_neighbourhood.remove(random_house)
+        
+        # get house type and id
         type_house = random_house.type
+        ID = random_house.id
 
-        house = House(type_house,str(i))
+        # make house with same id and type
+        house = House(type_house,str(ID))
         if location_checker(house, temp_neighbourhood) == False:
             while location_checker(house, temp_neighbourhood) == False:
                 house = House(type_house, i)
         
         temp_neighbourhood.append(house)
+
         # calculate new shortest_distances
         temp_neighbourhood = distance_check(temp_neighbourhood)
+
         # now calculate the score of this new neighbourhood
         new_score = scorecalculator(temp_neighbourhood)
+
         # compare the score of the old neighbourhood to the new one, choose the best one
         if new_score > score:
             neighbourhood = deepcopy(temp_neighbourhood)
             score = new_score
+
         # save progress in table
         table.append([i, max_houses, score, new_score])
 
     # save results in csv file
-
     df_hillclimber = pd.DataFrame(table, columns = ["iteration", "max_houses", "old_score", "new_score"])
     df_hillclimber.to_csv("results/" + str(iterations) + "-" + str(max_houses) +"-" + file_name +".csv")
 
