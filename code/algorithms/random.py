@@ -43,6 +43,7 @@ def random_algorithm(iterations, water_layout, max_houses):
             score = new_score
 
         table.append([i, max_houses, score])
+    
     df_random = pd.DataFrame(table, columns = ["iteration", "max_houses", "score"])
     df_random.to_csv("results/" + str(iterations) + "-" + str(max_houses) + "-random.csv")
 

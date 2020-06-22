@@ -58,7 +58,7 @@ def housebuilder(max_houses,amount_maison,amount_bungalow,amount_sfh, neighbourh
 
         # check if the house type should be bungalow
         elif i < amount_bungalow + amount_maison:
-            house= House("bungalow",i)
+            house = House("bungalow", i)
 
             # if it violates any rule create a new house with random coorinates
             while location_checker(house, neighbourhood) == False:
@@ -74,6 +74,11 @@ def housebuilder(max_houses,amount_maison,amount_bungalow,amount_sfh, neighbourh
 
         # append house to neighbourhood and calculate the distance 
         neighbourhood.append(house)
+
+        # calculate the shortest distance to another house for every house in the neighbourhood
         neighbourhood = distance_check(neighbourhood)
+    
+    # calculate the score of the entire neighbourhood
     score = scorecalculator(neighbourhood)
+    
     return neighbourhood, score

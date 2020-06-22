@@ -21,7 +21,7 @@ def location_checker(house, neighbourhood):
             horzWater = list(range(i.x0, i.x1))
             vertWater = list(range(i.y0, i.y1))
 
-            # check if one corner of the house is placed on water
+            # check if any corner of the house is placed on water
             if (house.x0 in horzWater and house.y0 in vertWater):
                 return False
             elif (house.x1 in horzWater and house.y0 in vertWater):

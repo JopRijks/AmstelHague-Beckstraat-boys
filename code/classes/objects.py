@@ -61,7 +61,7 @@ class House:
             self.price_increasement = float(0.06)
 
         # make coordinates if these are not given
-        if x==None or y==None:
+        if x == None or y == None:
             x = rd.randrange(self.free_area, (Borders().maxX - self.free_area - self.width))
             y = rd.randrange(self.free_area, (Borders().maxY - self.free_area - self.length))
         
@@ -70,7 +70,7 @@ class House:
         self.id = house_number
 
         # make the shortest distance the maximum distance, this the euclidean distance between both outer grid corners
-        self.shortest_distance = (Borders().maxY**2+Borders().maxX**2)**0.5
+        self.shortest_distance = (Borders().maxY**2 + Borders().maxX**2)**0.5
 
         # make from the coordinates from one corner the other coordinates
         self.x0 = x
