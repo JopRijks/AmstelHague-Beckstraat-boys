@@ -49,7 +49,7 @@ def distance_check(neighbourhood, version="efficient"):
         if i.name != "WATER":
 
             # make a polygon using the corners of the house
-            house_polygon = Polygon([(i.x0,i.y0),(i.x0,i.y1),(i.x1,i.y0),(i.x1,i.y1)])
+            house_polygon = Polygon([(i.x0,i.y0), (i.x1,i.y0), (i.x1,i.y1), (i.x0,i.y1)])
             
             # add the polygon to the houses dictionary with as key the ID
             houses_dict[i.id] = house_polygon
