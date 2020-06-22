@@ -24,19 +24,12 @@ def scorecalculator(neighbourhood):
         if house.name != "WATER":
 
             # calculate the new house price with the price increasement from the extra free space
-            house.score = house.price*(1 + house.price_increasement*(round_down(house.shortest_distance,0)))
+            house.score = house.price*((1 + house.price_increasement*house.shortest_distance))
             score += house.score
 
     # return the score
     return score
 
-def round_down(n, decimals=0):
-
-    # the selected decimals as a power of the 10 to get the decimals before the .
-    multiplier = 10 ** decimals
-
-    # math.floor rounds the number down to the closest whole number below, though the multiplier we keep the wanted decimals
-    return math.floor(n * multiplier) / multiplier
 
 def distance_check(neighbourhood, version="efficient"):
     # create dictionaries
