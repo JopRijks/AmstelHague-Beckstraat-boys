@@ -14,8 +14,8 @@ import random as rd
 
 class Borders:
     def __init__(self):
-        self.maxX = 160
-        self.maxY = 180
+        self.maxX = 180
+        self.maxY = 160
 
 class Water:
     # Initializes water 
