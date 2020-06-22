@@ -25,15 +25,10 @@ def scorecalculator(neighbourhood):
         if house.name != "WATER":
 
             # calculate the new house price with the price increasement from the extra free space
-            
-            # house.score method
-            #house.score = house.price * (1 + house.price_increasement * house.shortest_distance)
-            
-            # variable method
-            individual_score = house.price * (1 + (house.price_increasement * house.shortest_distance))
+            house.score = house.price * (1 + house.price_increasement * math.floor(house.shortest_distance))
 
             # add house score to neighbourhood score
-            score += individual_score
+            score += house.score
 
     # return the score of the whole neighbourhood
     return score
@@ -48,12 +43,9 @@ def distance_check(neighbourhood, version="efficient"):
     for i in neighbourhood:
         if i.name != "WATER":
 
-            # make a polygon using the corners of the house
-            house_polygon = Polygon([(i.x0,i.y0), (i.x1,i.y0), (i.x1,i.y1), (i.x0,i.y1)])
-            
-            # add the polygon to the houses dictionary with as key the ID
-            houses_dict[i.id] = house_polygon
-    
+            # make a polygon using the corners of the house and add the polygon to the houses dictionary with as key the ID
+            houses_dict[i.id] = Polygon([(i.x0,i.y0), (i.x1,i.y0), (i.x1,i.y1), (i.x0,i.y1)])
+           
     # make a list of all the house values
     houses_list = list(houses_dict.values())
     
@@ -63,13 +55,13 @@ def distance_check(neighbourhood, version="efficient"):
         # remove the house from the neighbourhood and get the distance from the house
         neighbourhood_rest = deepcopy(houses_list)
         neighbourhood_rest.remove(poly)
-        shortest_distance[i] = math.floor(poly.distance(MultiPolygon(neighbourhood_rest)))
+        shortest_distance[i] = poly.distance(MultiPolygon(neighbourhood_rest))
     
     # loop through the neighbourhood and update shortest distance
     for house in neighbourhood:
         if house.name != "WATER":
             house.shortest_distance = shortest_distance[house.id]
-    
+
     # return updated neighbourhood
     return neighbourhood
    

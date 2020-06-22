@@ -75,8 +75,8 @@ def housebuilder(max_houses,amount_maison,amount_bungalow,amount_sfh, neighbourh
         # append house to neighbourhood and calculate the distance 
         neighbourhood.append(house)
 
-        # calculate the shortest distance to another house for every house in the neighbourhood
-        neighbourhood = distance_check(neighbourhood)
+    # calculate the shortest distance to another house for every house in the neighbourhood
+    neighbourhood = distance_check(neighbourhood)
     
     # calculate the score of the entire neighbourhood
     score = scorecalculator(neighbourhood)
