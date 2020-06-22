@@ -22,7 +22,7 @@ def scorecalculator(neighbourhood):
         if house.name != "WATER":
 
             # calculate the new house price with the price increasement from the extra free space
-            house.score = (house.price + house.price*house.price_increasement*(round_down(house.shortest_distance,0) - house.free_area))
+            house.score = house.price*(1 + house.price_increasement*(house.shortest_distance - house.free_area))
             score += house.score
 
     # return the score
