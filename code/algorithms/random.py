@@ -53,6 +53,6 @@ def random_algorithm(iterations, water_layout, max_houses, ts):
     visualise(best_map, highest_score, ts, "random_visualisation-"+ str(max_houses))
 
     # make a plot of the algorithms performance
-    performanceplot("random", max_houses, "dist", ts, df_random.score, ts)
+    performanceplot("random", max_houses, "dist", ts, df_random.score)
 
     return best_map, highest_score
