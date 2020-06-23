@@ -29,7 +29,7 @@ De class Border is belangrijk, omdat deze ervoor zorgt dat er in de hele reposit
 #### Water & House
 
 De belangrijkste objecten zijn Water en House, dit zijn de objecten die geplaatst worden op het gebied.
-Water heeft verschillende eigenschappen die geiniteerd moeten worden, zoals breedte en lengte. House heeft een aantal extra attributen, zoals de standaardprijs van het huis, de minimale vrijstand en de prijsverbetering per meter vrijstand.
+Water heeft verschillende eigenschappen die geiniteerd moeten worden, zoals breedte en lengte en de coordinaten van alle hoekpunten. House heeft een aantal extra attributen, zoals de standaardprijs van het huis, de minimale vrijstand en de prijsverbetering per meter vrijstand.
 
 ## Helpers
 
