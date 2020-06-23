@@ -13,29 +13,47 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import time
 
-def performanceplot(algorithm, n, plottype, ts, x, y=None):
+def performanceplot(algorithm, iterations, n, ts, x, y=None):
     plt.figure()
     # make a plot of the algorithms performance
     sns.set(style="darkgrid")
     
-    # create a histogram
-    if plottype == "dist":
+    # plot for random algorithm
+    if algorithm == "Random":
         ax = sns.distplot(x)
         ax.set_xlabel("Score (€)")
         ax.set_ylabel("Iterations")
     
-    # create a line diagram
-    if plottype == "line":
+    # plot for hill climber algorithm with random start
+    if algorithm == "Hillclimber-random":
         ax = sns.lineplot(x, y)
         ax.set_xlabel("Iterations")
         ax.set_ylabel("Score (€)")
+
+    # plot for hill climber algorithm with best random start
+    if algorithm == "Hillclimber-bestrandom":
+        ax = sns.lineplot(x, y)
+        ax.set_xlabel("Iterations")
+        ax.set_ylabel("Score (€)")
+
+    # plot for hill climber algorithm with greedy start
+    if algorithm == "Hillclimber-greedy":
+        ax = sns.lineplot(x, y)
+        ax.set_xlabel("Iterations")
+        ax.set_ylabel("Score (€)")
+
+    # plot for greedy algorithm
+    if algorithm == "Greedy":
+        ax = sns.lineplot(x, y)
+        ax.set_xlabel("Number of houses placed")
+        ax.set_ylabel("Total score (€)")
 
     # create title
     ax.set_title("{} algorithm for {} houses".format(algorithm, n))
 
     # save plot as image
     ax.figure.savefig("results/plot.png")
-    ax.figure.savefig("results/plots/"+str(ts)+"-"+plottype+"plot_"+algorithm+"-"+str(n)+".png")
+    ax.figure.savefig("results/plots/"+str(ts)+"-plot-"+algorithm+"-"+str(iterations)+"-"+str(n)+".png")
 
     sns.set()
     plt.close()

@@ -69,23 +69,25 @@ if __name__ == "__main__":
     dt = datetime.datetime.now()
     ts = dt.strftime("%Y-%m-%d_%Hh%Mm%Ss")
 
-    # execute hill climber algorithm
-    if approach == "hillclimber":
-        neighbourhood, score = hillclimber_algorithm(iterations, water_layout, n_houses)
+    # execute hill climber algorithm with a random neighbourhood as input
+    if approach == "hillclimber-random":
+        neighbourhood, score = hillclimber_algorithm(iterations, water_layout, n_houses, ts)
 
     # execute greedy algorithm
     elif approach == "greedy":
         neighbourhood, score = greedy_algorithm(iterations, water_layout, n_houses)
 
-    # execute greed-hillclimber algorithm
+    # execute hillclimber algorithm with greedy input
     elif approach == "hillclimber-greedy":
         neighbourhood, score = greedy_algorithm(iterations, water_layout, n_houses)
-        neighbourhood, score = hillclimber_algorithm(iterations, water_layout, n_houses, neighbourhood, score, "greedy")
+        neighbourhood, score = hillclimber_algorithm(iterations, water_layout, n_houses, ts, neighbourhood, score, "greedy")
 
-    elif approach == "bestrandom-hillclimber":
-        neighbourhood, score = random_algorithm(iterations, water_layout, n_houses, ts)
-        neighbourhood, score = hillclimber_algorithm(iterations, water_layout, n_houses, neighbourhood, score, "random")
-    # if no algorithm or random is specified execute random algorithm
+    # execute hillclimber algorithm with the best result of 1000 random iterations as input
+    elif approach == "hillclimber-bestrandom":
+        neighbourhood, score = random_algorithm(1000, water_layout, n_houses, ts)
+        neighbourhood, score = hillclimber_algorithm(iterations, water_layout, n_houses, ts, neighbourhood, score, "bestrandom")
+    
+    # if none of the above or random is specified, execute random algorithm
     else:
         neighbourhood, score = random_algorithm(iterations, water_layout, n_houses, ts)
 

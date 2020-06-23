@@ -51,9 +51,9 @@ def random_algorithm(iterations, water_layout, max_houses, ts):
     df_random = pd.DataFrame(table, columns = ["iteration", "score"])
 
     # make a visualisation of the best random neighbourhood and save it as an image
-    visualise(best_map, highest_score, ts, "random_visualisation-"+ str(max_houses))
+    visualise(best_map, highest_score, ts, "random_map-"+ str(max_houses))
 
     # make a plot of the algorithms performance
-    performanceplot("random", max_houses, "dist", ts, df_random.score)
+    performanceplot("Random", iterations, max_houses, ts, df_random.score)
 
     return best_map, highest_score

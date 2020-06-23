@@ -34,7 +34,7 @@ def output(neighbourhood, score, algorithm, iterations, max_houses, water_layout
     df.to_csv("results/output.csv")
 
     # archive the dataframe as a csv file
-    df.to_csv("results/archive/"+ts+"-output-best-"+str(algorithm)+"-"+str(iterations)+"-"+str(max_houses)+"-"+str(water_layout)+".csv")
+    df.to_csv("results/archive/"+ts+"-output-"+str(algorithm)+"-"+str(iterations)+"-"+str(max_houses)+"-"+str(water_layout)+".csv")
     
     # return the dataframe
     return df
