@@ -15,6 +15,8 @@ import numpy as np
 import math
 import matplotlib.pyplot as plt
 import time
+import seaborn as sns
+from copy import deepcopy
 
 from code.helpers.score import scorecalculator, distance_check
 from code.helpers.visualize import visualise
@@ -27,7 +29,7 @@ def random_algorithm(iterations, water_layout, max_houses):
     fraction_sfh,fraction_bungalow,fraction_maison = 0.6, 0.25, 0.15
     amount_sfh, amount_bungalow, amount_maison = max_houses * fraction_sfh, max_houses * fraction_bungalow, max_houses * fraction_maison
 
-    highest_score, best, table = 0, 0, []
+    highest_score, best_map, table = 0, 0, []
     
     # performe the algorithm for a number of iterations
     for i in range(iterations):
@@ -39,21 +41,24 @@ def random_algorithm(iterations, water_layout, max_houses):
 
         # if the score of the neighbourhood in this iteration is the highest till now than save the neighbourhood and the score
         if new_score > highest_score:
-            best = neighbourhood
-            score = new_score
+            best_map = deepcopy(neighbourhood)
+            highest_score = deepcopy(new_score)
 
-        table.append([i, max_houses, score])
+        table.append([i, max_houses, new_score])
     
     named_tuple = time.localtime() 
     time_string = time.strftime("%d-%m-%Y--%H-%M", named_tuple)
     
     df_random = pd.DataFrame(table, columns = ["iteration", "max_houses", "score"])
-    df_random.to_csv("results/random-"+ str(iterations) + "-" + str(max_houses) + "-"+ time_string+".csv")
+    df_random.to_csv("results/stats.csv")
+
+    # archive algorithm performance
+    df_random.to_csv("results/plots/random-"+str(iterations)+"-"+str(max_houses)+"-"+str(water_layout)+ "-"+ time_string+".csv")
 
     # make a visualisation of the best random neighbourhood and save it as an image
-    visualise(best, score, time_string, "random_visualisation-"+ str(max_houses))
+    visualise(best_map, highest_score, time_string, "random_visualisation-"+ str(max_houses))
 
     # make a plot of the algorithms performance
     performanceplot("random", max_houses, "dist", time_string, df_random.score, time_string)
 
-    return neighbourhood, score
+    return best_map, highest_score

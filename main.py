@@ -54,16 +54,14 @@ if __name__ == "__main__":
         n_houses = int(sys.argv[3])
 
         # default 20 houses if input is below 1 or over 60
-        if n_houses < 1:
-            n_houses = 20
-        if n_houses > 80:
+        if ((n_houses != 20) and (n_houses != 40) and (n_houses != 60)):
             n_houses = 20
 
-        # 0 for wijk_1, 1 for wijk_2 or 2 for wijk_3
+        # 0 for wijk_1, 1 for wijk_2, 2 for wijk_3
         water_layout = int(sys.argv[4])
-        if water_layout < 0:
-            water_layout = 0
-        if water_layout > 2:
+        if water_layout == 3:
+            water_layout = 2
+        elif ((water_layout < 0) or (water_layout > 3)):
             water_layout = 0
 
     # execute hill climber algorithm
@@ -75,7 +73,7 @@ if __name__ == "__main__":
         neighbourhood, score = greedy_algorithm(iterations, water_layout, n_houses)
 
     # execute greed-hillclimber algorithm
-    elif approach == "greedy-hillclimber":
+    elif approach == "hillclimber-greedy":
         neighbourhood, score = greedy_algorithm(iterations, water_layout, n_houses)
         neighbourhood, score = hillclimber_algorithm(iterations, water_layout, n_houses, neighbourhood, score, "greedy")
 
@@ -87,8 +85,8 @@ if __name__ == "__main__":
         neighbourhood, score = random_algorithm(iterations, water_layout, n_houses)
         
     
-    # create the wanted output and print the dataframe
-    output = output(neighbourhood,score)
+    # generate output and print dataframe
+    output(neighbourhood, score, approach, iterations, n_houses, water_layout)
     print(output)
     
     # set time from end algorithm and print the total duration
