@@ -14,6 +14,8 @@ import seaborn as sns
 import time
 
 def performanceplot(algorithm, iterations, n, ts, x, y=None):
+    """Makes a graph which shows the peformance of the algorithm per iteration or houses placed"""
+    
     plt.figure()
     # make a plot of the algorithms performance
     sns.set(style="darkgrid")

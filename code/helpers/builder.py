@@ -9,16 +9,15 @@ Universiteit van Amsterdam
 Jop Rijksbaron, Robin Spiers & Vincent Kleiman
 """
 
-# in dit bestand komt een algoritme
 import pandas as pd
 
 from code.classes.objects import Water, House
-from code.helpers.visualize import visualise
 from code.helpers.location import location_checker
 from code.helpers.score import scorecalculator, distance_check
 
 def waterbuilder(choice, neighbourhood):
-    
+    """Places the water objects in the neighbourhood with the right attributes"""
+
     # collect all csv files and convert them to pandas dataframe and select the wanted file with the choice variable
     df = [pd.read_csv("data/wijk_1.csv"),pd.read_csv("data/wijk_2.csv"),pd.read_csv("data/wijk_3.csv")][choice]
 
@@ -43,6 +42,7 @@ def waterbuilder(choice, neighbourhood):
     return neighbourhood
 
 def housebuilder(max_houses,amount_maison,amount_bungalow,amount_sfh, neighbourhood):
+    """Places the objects of houses in the neighbourhood with the right attributes"""
 
     # loop for every house that has to be placed
     for i in range(max_houses):
@@ -75,10 +75,9 @@ def housebuilder(max_houses,amount_maison,amount_bungalow,amount_sfh, neighbourh
         # append house to neighbourhood and calculate the distance 
         neighbourhood.append(house)
 
-    # calculate the shortest distance to another house for every house in the neighbourhood
+    # calculate the shortest distance to another house for every house in the neighbourhood and append them to the attributes of the houses
     neighbourhood = distance_check(neighbourhood)
     
-    # calculate the score of the entire neighbourhood
+    # calculate the score of the entire neighbourhood and return the score and neighbourhod
     score = scorecalculator(neighbourhood)
-    
     return neighbourhood, score

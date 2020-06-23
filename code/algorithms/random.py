@@ -10,21 +10,17 @@ Jop Rijksbaron, Robin Spiers & Vincent Kleiman
 """
 
 import pandas as pd
-import random as rd
-import numpy as np
-import math
 import matplotlib.pyplot as plt
-import time
-import seaborn as sns
 from copy import deepcopy
 
 from code.helpers.score import scorecalculator, distance_check
-from code.helpers.visualize import visualise
+from code.helpers.visualize import create_map
 from code.helpers.builder import waterbuilder, housebuilder
 from code.helpers.performance import performanceplot
 
 def random_algorithm(iterations, water_layout, max_houses, ts):
-    
+    """Peforming the random algorithm the desired iterations with the wanted water-layout and amount of houses""" 
+
     # standard neighbourhood distribution of the houses
     fraction_sfh,fraction_bungalow,fraction_maison = 0.6, 0.25, 0.15
     amount_sfh, amount_bungalow, amount_maison = max_houses * fraction_sfh, max_houses * fraction_bungalow, max_houses * fraction_maison
@@ -51,7 +47,7 @@ def random_algorithm(iterations, water_layout, max_houses, ts):
     df_random = pd.DataFrame(table, columns = ["iteration", "score"])
 
     # make a visualisation of the best random neighbourhood and save it as an image
-    visualise(best_map, highest_score, "Random", ts, "random_map-"+ str(max_houses))
+    create_map(best_map, highest_score, "Random", ts, "random_map-"+ str(max_houses))
 
     # make a plot of the algorithms performance
     performanceplot("Random", iterations, max_houses, ts, df_random.score)

@@ -11,6 +11,8 @@ Jop Rijksbaron, Robin Spiers & Vincent Kleiman
 """
 
 def location_checker(house, neighbourhood):
+    """Checks if the placement of the house wouldn't cause any violations rules"""
+
     # loop through the neighbourhood
     for i in neighbourhood:
 
@@ -99,6 +101,7 @@ def location_checker(house, neighbourhood):
     return True
 
 def distanceCalc(x0,y0,x1,y1):
-    
+    """Calculates the euclidean distance between the given two coordinates"""
+
     # calculate euclidian distance
     return abs(((x1-x0)**2+(y1-y0)**2)**0.5)

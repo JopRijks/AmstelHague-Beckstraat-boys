@@ -17,7 +17,9 @@ import time
 
 from code.classes.objects import Borders
 
-def visualise(nb, score, algorithm, time_string, x=None):
+def create_map(nb, score, algorithm, time_string, x=None):
+    """visualize the map with all houses and water on it and in title the score is given"""
+
     # set axis 
     ax = plt.axes()
     ax.set_xlim(0,Borders().maxX)
