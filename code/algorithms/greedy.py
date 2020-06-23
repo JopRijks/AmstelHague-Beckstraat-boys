@@ -102,7 +102,7 @@ def greedy_algorithm(iterations, water_layout, max_houses, ts):
     df_greedy = pd.DataFrame(table, columns = ["iteration", "max_houses","score"])
     
     # make a visualisation of the best random neighbourhood and save it
-    visualise(neighbourhood, highest_score, ts, "greedy_map-" + str(max_houses))
+    visualise(neighbourhood, highest_score, "Greedy", ts, "greedy_map-" + str(max_houses))
 
     # make a histogram of the scores from all the neighbourhoods made through the iterations
     performanceplot("Greedy", 1, max_houses, ts, df_greedy.iteration, df_greedy.score)

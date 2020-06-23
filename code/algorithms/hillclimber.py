@@ -89,7 +89,7 @@ def hillclimber_algorithm(iterations, water_layout, max_houses, ts, neighbourhoo
     df_hillclimber = pd.DataFrame(table, columns = ["iteration", "max_houses", "old_score", "new_score"])
     
     # make a visualisation of the best score and save it
-    visualise(neighbourhood, score, ts, str(file_name+"_map-"+str(max_houses)))
+    visualise(neighbourhood, score, file_name, ts, str(file_name+"_map-"+str(max_houses)))
     
     # create a plot of the progress
     performanceplot(file_name, iterations, max_houses, ts, df_hillclimber.iteration, df_hillclimber.old_score)

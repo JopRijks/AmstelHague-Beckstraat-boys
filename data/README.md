@@ -7,25 +7,7 @@ De bestanden hanteren de volgende structuur:
 * `top_right_xy`  bevat de (x,y)-coördinaten van de rechterbovenhoek van een oppervlaktewater-object
 * `type` bevat het type van een object (voor oppervlaktewater is dit 'WATER') 
 
+## Varianten
+In de onderstaande afbeeldingen zijn de visualisaties van de drie varianten te zien. Van links naar rechts: wijk_1, wijk_2 en wijk_3.
 
----
-
-
-Hieronder de drie verschillende waterindelingen van de wijk te zien
-#### Wijk 1
-![](https://github.com/JopRijks/Amstelhaege/blob/master/doc/wijk_1.png)
-
-
----
-
-
-#### Wijk 2
-![](https://github.com/JopRijks/Amstelhaege/blob/master/doc/wijk_2.png)
-
-
-
----
-
-
-#### Wijk 3
-![](https://github.com/JopRijks/Amstelhaege/blob/master/doc/wijk_3.png)
+<img src="https://github.com/JopRijks/Amstelhaege/blob/master/doc/wijk_1.png" width=32%> <img src="https://github.com/JopRijks/Amstelhaege/blob/master/doc/wijk_2.png" width=32%> <img src="https://github.com/JopRijks/Amstelhaege/blob/master/doc/wijk_3.png" width=32%>
