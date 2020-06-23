@@ -23,13 +23,14 @@ def scorecalculator(neighbourhood):
     for house in neighbourhood:
         if house.name != "WATER":
 
-            # calculate the new house price with the price increasement without acknowleging the obligated free space
-            # this is wat check50 wants but is not right according to the assignment
+            # calculate the new house price with the price increasement without acknowledging the obligated free space
+            # this is wat check50 wants but we believe that it is not right according to the assignment
             house.score = house.price * (1 + house.price_increasement * math.floor(house.shortest_distance))
 
             # calculate the new house price with the price increasement from the extra free space
-            # this is according through the assignment but not from check50, that's why it is commented
-            # but if it's decommented it produces the right answer
+            
+            # this should be correct according to the assignment but not for check50, thus it is placed as a comment
+            # but if it is used as code it calculates the score using only the EXTRA free space, not the required free space
             # house.score = house.price * (1 + house.price_increasement * (math.floor(house.shortest_distance) - house.free_area))
 
             # add house score to neighbourhood score
