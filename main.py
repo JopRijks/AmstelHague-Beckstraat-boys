@@ -75,11 +75,11 @@ if __name__ == "__main__":
 
     # execute greedy algorithm
     elif approach == "greedy":
-        neighbourhood, score = greedy_algorithm(iterations, water_layout, n_houses)
+        neighbourhood, score = greedy_algorithm(iterations, water_layout, n_houses, ts)
 
     # execute hillclimber algorithm with greedy input
     elif approach == "hillclimber-greedy":
-        neighbourhood, score = greedy_algorithm(iterations, water_layout, n_houses)
+        neighbourhood, score = greedy_algorithm(iterations, water_layout, n_houses, ts)
         neighbourhood, score = hillclimber_algorithm(iterations, water_layout, n_houses, ts, neighbourhood, score, "greedy")
 
     # execute hillclimber algorithm with the best result of 1000 random iterations as input
@@ -91,9 +91,8 @@ if __name__ == "__main__":
     else:
         neighbourhood, score = random_algorithm(iterations, water_layout, n_houses, ts)
 
-    # generate output and print dataframe
+    # generate output
     output(neighbourhood, score, approach, iterations, n_houses, water_layout, ts)
-    print(output)
     
     # set time from end algorithm and print the total duration
     t2 = time.time()

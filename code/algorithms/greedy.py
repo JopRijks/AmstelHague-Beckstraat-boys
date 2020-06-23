@@ -24,7 +24,7 @@ from code.classes.objects import Borders, House, Water
 from code.helpers.location import location_checker
 from code.helpers.performance import performanceplot
 
-def greedy_algorithm(iterations, water_layout, max_houses):
+def greedy_algorithm(iterations, water_layout, max_houses, ts):
     # standard neighbourhood distribution of the houses
     fraction_bungalow,fraction_maison = 0.25, 0.15
     amount_bungalow, amount_maison =  max_houses * fraction_bungalow, max_houses * fraction_maison
@@ -98,17 +98,13 @@ def greedy_algorithm(iterations, water_layout, max_houses):
         # add a new row wiith values to the table
         table.append([i, max_houses, score])
     
-    named_tuple = time.localtime() 
-    time_string = time.strftime("%d-%m-%Y--%H-%M", named_tuple)
-    
-    # save the information from the iteration
+    # create dataframe to plot algorithm performance
     df_greedy = pd.DataFrame(table, columns = ["iteration", "max_houses","score"])
-    df_greedy.to_csv("results/greedy-"+"-"+str(iterations)+"-"+str(max_houses)+"-"+ time_string+".csv")
     
     # make a visualisation of the best random neighbourhood and save it
-    visualise(neighbourhood, highest_score, time_string, "greedy_visualisation-" + str(max_houses))
+    visualise(neighbourhood, highest_score, ts, "greedy_map-" + str(max_houses))
 
     # make a histogram of the scores from all the neighbourhoods made through the iterations
-    performanceplot("Greedy", max_houses, "line", time_string, df_greedy.iteration, df_greedy.score)
+    performanceplot("Greedy", 1, max_houses, ts, df_greedy.iteration, df_greedy.score)
 
     return neighbourhood, score
