@@ -10,4 +10,4 @@ De bestanden hanteren de volgende structuur:
 ## Varianten
 In de onderstaande afbeeldingen zijn de visualisaties van de drie varianten te zien. Van links naar rechts: wijk_1, wijk_2 en wijk_3.
 
-<img src="https://github.com/JopRijks/Amstelhaege/blob/master/doc/wijk_1.png" width=35%> <img src="https://github.com/JopRijks/Amstelhaege/blob/master/doc/wijk_2.png" width=35%> <img src="https://github.com/JopRijks/Amstelhaege/blob/master/doc/wijk_3.png" width=35%>
+<img src="https://github.com/JopRijks/Amstelhaege/blob/master/doc/wijk_1.png" width=32%> <img src="https://github.com/JopRijks/Amstelhaege/blob/master/doc/wijk_2.png" width=32%> <img src="https://github.com/JopRijks/Amstelhaege/blob/master/doc/wijk_3.png" width=32%>
