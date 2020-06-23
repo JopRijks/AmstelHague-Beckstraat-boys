@@ -29,7 +29,7 @@ def random_algorithm(iterations, water_layout, max_houses, ts):
     fraction_sfh,fraction_bungalow,fraction_maison = 0.6, 0.25, 0.15
     amount_sfh, amount_bungalow, amount_maison = max_houses * fraction_sfh, max_houses * fraction_bungalow, max_houses * fraction_maison
 
-    highest_score, best_map, table = 0, 0, []
+    highest_score, table = 0, []
     
     # performe the algorithm for a number of iterations
     for i in range(iterations):
@@ -44,10 +44,11 @@ def random_algorithm(iterations, water_layout, max_houses, ts):
             best_map = deepcopy(neighbourhood)
             highest_score = deepcopy(new_score)
 
-        table.append([i, max_houses, new_score])
+        # store iteration score in table
+        table.append([i, new_score])
     
     # create dataframe to measure algorithm performance
-    df_random = pd.DataFrame(table, columns = ["iteration", "max_houses", "score"])
+    df_random = pd.DataFrame(table, columns = ["iteration", "score"])
 
     # make a visualisation of the best random neighbourhood and save it as an image
     visualise(best_map, highest_score, ts, "random_visualisation-"+ str(max_houses))
