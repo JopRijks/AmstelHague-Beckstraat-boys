@@ -14,7 +14,7 @@ import random as rd
 import numpy as np
 import math
 import matplotlib.pyplot as plt
-import seaborn as sns
+import time
 
 from code.helpers.score import scorecalculator, distance_check
 from code.helpers.visualize import visualise
@@ -44,13 +44,16 @@ def random_algorithm(iterations, water_layout, max_houses):
 
         table.append([i, max_houses, score])
     
+    named_tuple = time.localtime() 
+    time_string = time.strftime("%d-%m-%Y--%H-%M", named_tuple)
+    
     df_random = pd.DataFrame(table, columns = ["iteration", "max_houses", "score"])
-    df_random.to_csv("results/" + str(iterations) + "-" + str(max_houses) + "-random.csv")
+    df_random.to_csv("results/random-"+ str(iterations) + "-" + str(max_houses) + "-"+ time_string+".csv")
 
     # make a visualisation of the best random neighbourhood and save it as an image
-    visualise(best, score, "random_visualisation-"+ str(max_houses))
+    visualise(best, score, time_string, "random_visualisation-"+ str(max_houses))
 
     # make a plot of the algorithms performance
-    performanceplot("random", max_houses, "dist", df_random.score)
+    performanceplot("random", max_houses, "dist", time_string, df_random.score, time_string)
 
     return neighbourhood, score

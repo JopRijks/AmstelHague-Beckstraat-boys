@@ -15,6 +15,7 @@ import numpy as np
 import math
 import matplotlib.pyplot as plt
 from copy import deepcopy
+import time
 
 from code.helpers.score import scorecalculator, distance_check
 from code.helpers.visualize import visualise
@@ -96,15 +97,18 @@ def greedy_algorithm(iterations, water_layout, max_houses):
 
         # add a new row wiith values to the table
         table.append([i, max_houses, score])
-
+    
+    named_tuple = time.localtime() 
+    time_string = time.strftime("%d-%m-%Y--%H-%M", named_tuple)
+    
     # save the information from the iteration
     df_greedy = pd.DataFrame(table, columns = ["iteration", "max_houses","score"])
-    df_greedy.to_csv("results/"+ str(iterations)+"-"+str(max_houses)+"-greedy.csv")
+    df_greedy.to_csv("results/greedy-"+"-"+str(iterations)+"-"+str(max_houses)+"-"+ time_string+".csv")
     
     # make a visualisation of the best random neighbourhood and save it
-    visualise(neighbourhood, highest_score, "greedy_visualisation-" + str(max_houses))
+    visualise(neighbourhood, highest_score, time_string, "greedy_visualisation-" + str(max_houses))
 
     # make a histogram of the scores from all the neighbourhoods made through the iterations
-    performanceplot("Greedy", max_houses, "line", df_greedy.iteration, df_greedy.score)
+    performanceplot("Greedy", max_houses, "line", time_string, df_greedy.iteration, df_greedy.score)
 
     return neighbourhood, score

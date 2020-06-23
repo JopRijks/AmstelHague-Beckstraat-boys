@@ -15,7 +15,7 @@ import numpy as np
 import math
 import matplotlib.pyplot as plt
 import random as rd
-
+import time
 from copy import deepcopy
 
 from code.helpers.score import scorecalculator, distance_check
@@ -25,15 +25,17 @@ from code.helpers.location import location_checker
 from code.classes.objects import Borders, House
 from code.helpers.performance import performanceplot
 
-def hillclimber_algorithm(iterations, water_layout, max_houses, neighbourhood=None, score = None):
+def hillclimber_algorithm(iterations, water_layout, max_houses, neighbourhood=None, score = None, mode=None):
 
     ################################ start by creating a random neighbourhood ###################
     
     # standard neighbourhood distribution of the houses
     amount_sfh, amount_bungalow, amount_maison = max_houses*0.6, max_houses*0.25, max_houses*0.15
 
-    if neighbourhood != None:
+    if mode == "greedy":
         file_name = "greedy-hilclimber"
+    elif mode == "random":
+        file_name = "best-random-hillclimber"
     else:
         file_name = "hillclimber"
 
@@ -83,14 +85,17 @@ def hillclimber_algorithm(iterations, water_layout, max_houses, neighbourhood=No
         # save progress in table
         table.append([i, max_houses, score, new_score])
 
+    named_tuple = time.localtime() 
+    time_string = time.strftime("%d-%m-%Y--%H-%M", named_tuple)
+
     # save results in csv file
     df_hillclimber = pd.DataFrame(table, columns = ["iteration", "max_houses", "old_score", "new_score"])
-    df_hillclimber.to_csv("results/" + str(iterations) + "-" + str(max_houses) +"-" + file_name +".csv")
-
+    df_hillclimber.to_csv("results/" + file_name + str(iterations) + "-" + str(max_houses) +"-" + time_string + ".csv")
+    
     # make a visualisation of the best score and save it
-    visualise(neighbourhood, score, file_name+"_visualisation-"+str(max_houses))
+    visualise(neighbourhood, score, time_string, file_name+"_visualisation-"+str(max_houses))
     
     # create a plot of the progress
-    performanceplot(file_name, max_houses, "line", df_hillclimber.iteration, df_hillclimber.old_score)
+    performanceplot(file_name, max_houses, "line", time_string, df_hillclimber.iteration, df_hillclimber.old_score)
 
     return neighbourhood, score

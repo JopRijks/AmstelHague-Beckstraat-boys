@@ -13,10 +13,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as rect
 import matplotlib.collections as coll
+import time
 
 from code.classes.objects import Borders
 
-def visualise(nb, score, x=None):
+def visualise(nb, score, time_string, x=None):
     # set axis 
     ax = plt.axes()
     ax.set_xlim(0,Borders().maxX)
@@ -56,5 +57,5 @@ def visualise(nb, score, x=None):
             ax.add_collection(sfh)
 
     # save the file in the results folder and close it
-    plt.savefig("results/" + str(x) + ".png")
+    plt.savefig("results/" + str(x)+ "-" + time_string+".png")
     plt.close()

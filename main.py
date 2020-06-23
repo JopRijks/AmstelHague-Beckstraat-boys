@@ -33,7 +33,7 @@ if __name__ == "__main__":
     # check if number of input arguments is correct
     if len(sys.argv) != 5:
         print("wrong input \n use: [approach] [iterations] [number of houses] [water map]")
-        print("approach: random, hillcliber, greedy or greedy-hillclimber")
+        print("approach: random, hillcliber, greedy, bestrandom-hillcimber or greedy-hillclimber")
         print("iterations: just a positive number")
         print("number of houses: choose 20, 40 or 60")
         print("water map: choose 0, 1 or 2")
@@ -77,11 +77,15 @@ if __name__ == "__main__":
     # execute greed-hillclimber algorithm
     elif approach == "greedy-hillclimber":
         neighbourhood, score = greedy_algorithm(iterations, water_layout, n_houses)
-        neighbourhood, score = hillclimber_algorithm(iterations, water_layout, n_houses, neighbourhood, score)
-        
+        neighbourhood, score = hillclimber_algorithm(iterations, water_layout, n_houses, neighbourhood, score, "greedy")
+
+    elif approach == "bestrandom-hillclimber":
+        neighbourhood, score = random_algorithm(iterations, water_layout, n_houses)
+        neighbourhood, score = hillclimber_algorithm(iterations, water_layout, n_houses, neighbourhood, score, "random")
     # if no algorithm or random is specified execute random algorithm
     else:
         neighbourhood, score = random_algorithm(iterations, water_layout, n_houses)
+        
     
     # create the wanted output and print the dataframe
     output = output(neighbourhood,score)

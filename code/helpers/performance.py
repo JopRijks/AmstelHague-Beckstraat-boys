@@ -11,9 +11,10 @@ Jop Rijksbaron, Robin Spiers & Vincent Kleiman
 
 import matplotlib.pyplot as plt
 import seaborn as sns
+import time
 
-def performanceplot(algorithm, n, plottype, x, y=None):
-    
+def performanceplot(algorithm, n, plottype, time_string, x, y=None):
+    plt.figure()
     # make a plot of the algorithms performance
     sns.set(style="darkgrid")
     
@@ -33,5 +34,6 @@ def performanceplot(algorithm, n, plottype, x, y=None):
     ax.set_title("{} algorithm for {} houses".format(algorithm, n))
 
     # save plot as image
-    ax.figure.savefig("results/"+plottype+"plot_"+algorithm+"-"+str(n)+".png")
+    ax.figure.savefig("results/"+plottype+"plot_"+algorithm+"-"+str(n)+"-"+str(time_string)+".png")
+    sns.set()
     plt.close()
