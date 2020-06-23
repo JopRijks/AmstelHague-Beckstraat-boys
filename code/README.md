@@ -42,6 +42,7 @@ Het bestand `builder.py` bevat de functies `waterbuilder` en `housebuilder`. Zoa
 #### score.py
 
 Het bestand `score.py` bevat twee functies om de score van de gehele wijk te berekenen. Allereerst berekent de functie `distance_check` voor ieder huis de vrijstand. Deze informatie kan vervolgens door de functie `scorecalculator` gebruikt worden om de score van de complete wijk te berekenen.
+In `scorecalculator` kan op twee verschillende manieren de score van de totale waarde van de wijk worden berekend. In de opdracht staat dat alleen de extra vrijstand bijdroeg aan de prijsverhoging per meter maar in check50 werd hier geen rekening meegehouden en werd alleen de kortste afstand tot het dichstbijzijnde huis. Hier kwamen achter door verschillende mogelijkheden te testen, wanneer verplichte vrijstand wel wordt meegenomen in de berekening van de score dan gaf check50 wel een goede respons. Hiervoor hebben we gekozen om de check50 manier te hanteren en de manier van de opdracht in een comment erbij te zetten.
 
 #### visualize.py, performance.py & output_generator.py
 
