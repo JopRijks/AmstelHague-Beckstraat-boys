@@ -29,7 +29,7 @@ def hillclimber_algorithm(iterations, water_layout, max_houses, ts, neighbourhoo
     amount_sfh, amount_bungalow, amount_maison = max_houses*0.6, max_houses*0.25, max_houses*0.15
 
     if mode == "greedy":
-        file_name = "Hilclimber-greedy"
+        file_name = "Hillclimber-greedy"
     elif mode == "bestrandom":
         file_name = "Hillclimber-bestrandom"
     else:
