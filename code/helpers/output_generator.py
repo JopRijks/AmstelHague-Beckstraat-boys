@@ -9,8 +9,9 @@ Universiteit van Amsterdam
 Jop Rijksbaron, Robin Spiers & Vincent Kleiman
 """
 import pandas as pd
+import datetime
 
-def output(neighbourhood, score):
+def output(neighbourhood, score, algorithm, iterations, k_houses, wijk):
     
     # create the table
     table = []
@@ -29,8 +30,15 @@ def output(neighbourhood, score):
     # turn the table into a dataframe
     df = pd.DataFrame(table, columns=["structure", "corner_1", "corner_2", "corner_3", "corner_4", "type"]).set_index("structure")
     
-    # save the dataframe as a csv file
-    df.to_csv("output.csv")
+    # update output.csv file
+    df.to_csv("results/output.csv")
+
+    # get current timestamp
+    dt = datetime.datetime.now()
+    ts = dt.strftime("%Y-%m-%d_%Hh%Mm%Ss")
+
+    # archive the dataframe as a csv file
+    df.to_csv("results/archive/"+ts+"-output-best-"+str(algorithm)+"-"+str(iterations)+"-"+str(k_houses)+"-"+str(wijk)+".csv")
     
     # return the dataframe
     return df

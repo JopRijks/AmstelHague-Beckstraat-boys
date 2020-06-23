@@ -15,6 +15,7 @@ import numpy as np
 import math
 import matplotlib.pyplot as plt
 import seaborn as sns
+from copy import deepcopy
 
 from code.helpers.score import scorecalculator, distance_check
 from code.helpers.visualize import visualise
@@ -27,7 +28,7 @@ def random_algorithm(iterations, water_layout, max_houses):
     fraction_sfh,fraction_bungalow,fraction_maison = 0.6, 0.25, 0.15
     amount_sfh, amount_bungalow, amount_maison = max_houses * fraction_sfh, max_houses * fraction_bungalow, max_houses * fraction_maison
 
-    highest_score, best, table = 0, 0, []
+    highest_score, best_map, table = 0, 0, []
     
     # performe the algorithm for a number of iterations
     for i in range(iterations):
@@ -39,18 +40,21 @@ def random_algorithm(iterations, water_layout, max_houses):
 
         # if the score of the neighbourhood in this iteration is the highest till now than save the neighbourhood and the score
         if new_score > highest_score:
-            best = neighbourhood
-            score = new_score
+            best_map = deepcopy(neighbourhood)
+            highest_score = deepcopy(new_score)
 
-        table.append([i, max_houses, score])
+        table.append([i, max_houses, new_score])
     
     df_random = pd.DataFrame(table, columns = ["iteration", "max_houses", "score"])
-    df_random.to_csv("results/" + str(iterations) + "-" + str(max_houses) + "-random.csv")
+    df_random.to_csv("results/stats.csv")
+
+    # archive algorithm performance
+    df_random.to_csv("results/plots/random-"+str(iterations)+"-"+str(max_houses)+"-"+str(water_layout)+".csv")
 
     # make a visualisation of the best random neighbourhood and save it as an image
-    visualise(best, score, "random_visualisation-"+ str(max_houses))
+    visualise(best_map, highest_score, "random_visualisation-"+ str(max_houses))
 
     # make a plot of the algorithms performance
     performanceplot("random", max_houses, "dist", df_random.score)
 
-    return neighbourhood, score
+    return best_map, highest_score
