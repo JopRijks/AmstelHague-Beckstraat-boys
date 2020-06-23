@@ -12,6 +12,7 @@ import pandas as pd
 import datetime
 
 def output(neighbourhood, score, algorithm, iterations, max_houses, water_layout, ts):
+    """"creates the desired output which contains names, types and coordinates of the corners per object"""
     
     # create the table
     table = []

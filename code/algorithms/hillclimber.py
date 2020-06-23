@@ -11,22 +11,18 @@ Jop Rijksbaron, Robin Spiers & Vincent Kleiman
 
 import pandas as pd
 import random as rd
-import numpy as np
-import math
-import matplotlib.pyplot as plt
-import random as rd
-import time
 from copy import deepcopy
 
 from code.helpers.score import scorecalculator, distance_check
-from code.helpers.visualize import visualise
+from code.helpers.visualize import create_map
 from code.helpers.builder import waterbuilder, housebuilder
 from code.helpers.location import location_checker
 from code.classes.objects import Borders, House
 from code.helpers.performance import performanceplot
 
 def hillclimber_algorithm(iterations, water_layout, max_houses, ts, neighbourhood=None, score = None, mode=None):
-
+    """Peforming the greedy algorithm with the wanted water-layout, amount of houses and if specified after which other algorithm""" 
+    
     ################################ start by creating a random neighbourhood ###################
     
     # standard neighbourhood distribution of the houses
@@ -89,7 +85,7 @@ def hillclimber_algorithm(iterations, water_layout, max_houses, ts, neighbourhoo
     df_hillclimber = pd.DataFrame(table, columns = ["iteration", "max_houses", "old_score", "new_score"])
     
     # make a visualisation of the best score and save it
-    visualise(neighbourhood, score, file_name, ts, str(file_name+"_map-"+str(max_houses)))
+    create_map(neighbourhood, score, file_name, ts, str(file_name+"_map-"+str(max_houses)))
     
     # create a plot of the progress
     performanceplot(file_name, iterations, max_houses, ts, df_hillclimber.iteration, df_hillclimber.old_score)

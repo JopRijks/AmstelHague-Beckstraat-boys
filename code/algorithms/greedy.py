@@ -10,21 +10,19 @@ Jop Rijksbaron, Robin Spiers & Vincent Kleiman
 """
 
 import pandas as pd
-import random as rd
-import numpy as np
 import math
-import matplotlib.pyplot as plt
 from copy import deepcopy
-import time
 
 from code.helpers.score import scorecalculator, distance_check
-from code.helpers.visualize import visualise
+from code.helpers.visualize import create_map
 from code.helpers.builder import waterbuilder, housebuilder
 from code.classes.objects import Borders, House, Water
 from code.helpers.location import location_checker
 from code.helpers.performance import performanceplot
 
 def greedy_algorithm(iterations, water_layout, max_houses, ts):
+    """Peforming the greedy algorithm the desired iterations with the wanted water-layout and amount of houses""" 
+    
     # standard neighbourhood distribution of the houses
     fraction_bungalow,fraction_maison = 0.25, 0.15
     amount_bungalow, amount_maison =  max_houses * fraction_bungalow, max_houses * fraction_maison
@@ -102,7 +100,7 @@ def greedy_algorithm(iterations, water_layout, max_houses, ts):
     df_greedy = pd.DataFrame(table, columns = ["iteration", "max_houses","score"])
     
     # make a visualisation of the best random neighbourhood and save it
-    visualise(neighbourhood, highest_score, "Greedy", ts, "greedy_map-" + str(max_houses))
+    create_map(neighbourhood, highest_score, "Greedy", ts, "greedy_map-" + str(max_houses))
 
     # make a histogram of the scores from all the neighbourhoods made through the iterations
     performanceplot("Greedy", 1, max_houses, ts, df_greedy.iteration, df_greedy.score)

@@ -13,8 +13,6 @@ import math
 from shapely.geometry import Polygon, MultiPolygon
 from copy import deepcopy
 
-from code.helpers.location import distanceCalc
-
 def scorecalculator(neighbourhood):
     """Calculates the total score of the entire neighbourhood in euros."""
 

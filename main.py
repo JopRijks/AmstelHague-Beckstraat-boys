@@ -19,7 +19,7 @@ import time
 import datetime
 
 from code.helpers.score import scorecalculator
-from code.helpers.visualize import visualise
+from code.helpers.visualize import create_map
 from code.helpers.builder import waterbuilder, housebuilder
 from code.helpers.output_generator import output
 from code.algorithms.random import random_algorithm
@@ -27,6 +27,7 @@ from code.algorithms.hillclimber import hillclimber_algorithm
 from code.algorithms.greedy import greedy_algorithm
 
 if __name__ == "__main__":
+
     # set time from start algorithm 
     t1 = time.time()
 
