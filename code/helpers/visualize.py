@@ -17,7 +17,7 @@ import time
 
 from code.classes.objects import Borders
 
-def visualise(nb, score, time_string, x=None):
+def visualise(nb, score, algorithm, time_string, x=None):
     # set axis 
     ax = plt.axes()
     ax.set_xlim(0,Borders().maxX)
@@ -27,8 +27,8 @@ def visualise(nb, score, time_string, x=None):
     ax.set_facecolor("lightgreen")
 
     # title of the plot is the score in correct currency formatting
-    title = "Score: €{:,.2f}".format(score)
-    score_main, score_fractional = title.split(".")[0], title.split(".")[1]
+    title_score = "Algorithm: {} \nScore: €{:,.2f}".format(algorithm, score)
+    score_main, score_fractional = title_score.split(".")[0], title_score.split(".")[1]
     new_score_main = score_main.replace(",", ".")
     title = new_score_main + "," + score_fractional
     ax.set_title(title)
