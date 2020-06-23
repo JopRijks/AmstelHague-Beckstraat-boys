@@ -8,16 +8,6 @@ De bestanden hanteren de volgende structuur:
 * `type` bevat het type van een object (voor oppervlaktewater is dit 'WATER') 
 
 ## Varianten
-In de onderstaande afbeeldingen zijn de visualisaties van de drie varianten te zien.
+In de onderstaande afbeeldingen zijn de visualisaties van de drie varianten te zien. Van links naar rechts: wijk_1, wijk_2 en wijk_3.
 
-#### Wijk 1
-
-<img src="https://github.com/JopRijks/Amstelhaege/blob/master/doc/wijk_1.png" width=40%>
-
-#### Wijk 2
-
-<img src="https://github.com/JopRijks/Amstelhaege/blob/master/doc/wijk_1.png" width=40%>
-
-#### Wijk 3
-
-<img src="https://github.com/JopRijks/Amstelhaege/blob/master/doc/wijk_1.png" width=40%>
+<img src="https://github.com/JopRijks/Amstelhaege/blob/master/doc/wijk_1.png" width=25%> <img src="https://github.com/JopRijks/Amstelhaege/blob/master/doc/wijk_2.png" width=25%> <img src="https://github.com/JopRijks/Amstelhaege/blob/master/doc/wijk_3.png" width=25%>
