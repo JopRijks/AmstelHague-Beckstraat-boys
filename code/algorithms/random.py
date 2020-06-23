@@ -23,7 +23,7 @@ from code.helpers.visualize import visualise
 from code.helpers.builder import waterbuilder, housebuilder
 from code.helpers.performance import performanceplot
 
-def random_algorithm(iterations, water_layout, max_houses):
+def random_algorithm(iterations, water_layout, max_houses, ts):
     
     # standard neighbourhood distribution of the houses
     fraction_sfh,fraction_bungalow,fraction_maison = 0.6, 0.25, 0.15
@@ -46,19 +46,13 @@ def random_algorithm(iterations, water_layout, max_houses):
 
         table.append([i, max_houses, new_score])
     
-    named_tuple = time.localtime() 
-    time_string = time.strftime("%d-%m-%Y--%H-%M", named_tuple)
-    
+    # create dataframe to measure algorithm performance
     df_random = pd.DataFrame(table, columns = ["iteration", "max_houses", "score"])
-    df_random.to_csv("results/stats.csv")
-
-    # archive algorithm performance
-    df_random.to_csv("results/plots/random-"+str(iterations)+"-"+str(max_houses)+"-"+str(water_layout)+ "-"+ time_string+".csv")
 
     # make a visualisation of the best random neighbourhood and save it as an image
-    visualise(best_map, highest_score, time_string, "random_visualisation-"+ str(max_houses))
+    visualise(best_map, highest_score, ts, "random_visualisation-"+ str(max_houses))
 
     # make a plot of the algorithms performance
-    performanceplot("random", max_houses, "dist", time_string, df_random.score, time_string)
+    performanceplot("random", max_houses, "dist", ts, df_random.score, ts)
 
     return best_map, highest_score

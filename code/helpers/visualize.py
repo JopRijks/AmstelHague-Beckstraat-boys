@@ -57,5 +57,7 @@ def visualise(nb, score, time_string, x=None):
             ax.add_collection(sfh)
 
     # save the file in the results folder and close it
-    plt.savefig("results/" + str(x)+ "-" + time_string+".png")
+    plt.savefig("results/map.png")
+    plt.savefig("results/maps/"+time_string+"-"+str(x)+".png")
+    
     plt.close()

@@ -11,7 +11,7 @@ Jop Rijksbaron, Robin Spiers & Vincent Kleiman
 import pandas as pd
 import datetime
 
-def output(neighbourhood, score, algorithm, iterations, k_houses, wijk):
+def output(neighbourhood, score, algorithm, iterations, max_houses, water_layout, ts):
     
     # create the table
     table = []
@@ -33,12 +33,8 @@ def output(neighbourhood, score, algorithm, iterations, k_houses, wijk):
     # update output.csv file
     df.to_csv("results/output.csv")
 
-    # get current timestamp
-    dt = datetime.datetime.now()
-    ts = dt.strftime("%Y-%m-%d_%Hh%Mm%Ss")
-
     # archive the dataframe as a csv file
-    df.to_csv("results/archive/"+ts+"-output-best-"+str(algorithm)+"-"+str(iterations)+"-"+str(k_houses)+"-"+str(wijk)+".csv")
+    df.to_csv("results/archive/"+ts+"-output-best-"+str(algorithm)+"-"+str(iterations)+"-"+str(max_houses)+"-"+str(water_layout)+".csv")
     
     # return the dataframe
     return df

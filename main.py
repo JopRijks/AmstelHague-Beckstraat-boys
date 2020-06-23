@@ -16,6 +16,7 @@ import numpy as np
 import math
 import matplotlib.pyplot as plt
 import time
+import datetime
 
 from code.helpers.score import scorecalculator
 from code.helpers.visualize import visualise
@@ -64,6 +65,10 @@ if __name__ == "__main__":
         elif ((water_layout < 0) or (water_layout > 3)):
             water_layout = 0
 
+    # get current timestamp
+    dt = datetime.datetime.now()
+    ts = dt.strftime("%Y-%m-%d_%Hh%Mm%Ss")
+
     # execute hill climber algorithm
     if approach == "hillclimber":
         neighbourhood, score = hillclimber_algorithm(iterations, water_layout, n_houses)
@@ -78,15 +83,14 @@ if __name__ == "__main__":
         neighbourhood, score = hillclimber_algorithm(iterations, water_layout, n_houses, neighbourhood, score, "greedy")
 
     elif approach == "bestrandom-hillclimber":
-        neighbourhood, score = random_algorithm(iterations, water_layout, n_houses)
+        neighbourhood, score = random_algorithm(iterations, water_layout, n_houses, ts)
         neighbourhood, score = hillclimber_algorithm(iterations, water_layout, n_houses, neighbourhood, score, "random")
     # if no algorithm or random is specified execute random algorithm
     else:
-        neighbourhood, score = random_algorithm(iterations, water_layout, n_houses)
-        
-    
+        neighbourhood, score = random_algorithm(iterations, water_layout, n_houses, ts)
+
     # generate output and print dataframe
-    output(neighbourhood, score, approach, iterations, n_houses, water_layout)
+    output(neighbourhood, score, approach, iterations, n_houses, water_layout, ts)
     print(output)
     
     # set time from end algorithm and print the total duration
