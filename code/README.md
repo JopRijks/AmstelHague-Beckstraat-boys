@@ -7,7 +7,11 @@ De code is opgedeeld in drie verschillende categorieen; classes, helpers en algo
 
 ## classes
 
-In classes worden objecten geinitieerd.
+In classes worden objecten geinitieerd. Deze objecten zijn dan door de hele code te gebruiken en beschikken over verschillende eigenschappen naar keuze.
+
+#### objects
+In de code worden verschillende objecten gebruikt zoals Border, Water en Huis.
+De border is belangrijk zodat in de hele repository met dezelfde dimensie
 
 
 ---
@@ -27,5 +31,12 @@ In classes worden objecten geinitieerd.
 #### output generator
 
 
+---
+
 ## algorithms
 
+#### random
+
+#### hillclimber 
+
+#### greedy
